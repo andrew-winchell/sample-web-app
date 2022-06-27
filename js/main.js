@@ -50,12 +50,6 @@ require([
         outFields: ["*"]
       });
 
-      LAYER.when(() => {
-        return LAYER.queryExtent();
-      }).then((response) => {
-        VIEW.goTo(response.extent);
-      });
-
       //Initialize new Map constant
       const MAP = new Map({
         basemap: "arcgis-dark-gray",
@@ -65,7 +59,9 @@ require([
       //Initialize new MapView constant
       const VIEW = new MapView ({
         container: "viewDiv",
-        map: MAP
+        map: MAP,
+        center: [39.8283, -98.5795],
+        zoom: 3
       });
     }
 
