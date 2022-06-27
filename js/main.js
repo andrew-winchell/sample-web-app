@@ -69,6 +69,9 @@ require([
         VIEW.ui.add([EXPAND], {
             position: "top-right"
         });
+        
+        anonPanelElement.style.display = "none";
+        personalPanelElement.style.display = "block";
     }
 
       /*const portal = new Portal();
