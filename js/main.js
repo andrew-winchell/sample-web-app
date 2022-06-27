@@ -52,6 +52,7 @@ require([
       //Initialize new Map constant
       const MAP = new Map({
         basemap: "arcgis-dark-gray",
+        layers: [LAYER]
       });
 
       //Initialize new MapView constant
@@ -61,6 +62,21 @@ require([
         center: [-98.5795, 39.8283],
         zoom: 4
       });
+
+      const GRAPHIC = {
+        popupTemplate: {
+          content: "Mouse over features to show details..."
+        }
+      };
+
+      const FEATURE = new Feature({
+        graphic: GRAPHIC,
+        map: VIEW.map,
+        spatialReference: VIEW.spatialReference
+      });
+
+      VIEW.ui.add(FEATURE, "bottom-left");
+
     }
 
     function addWidgets(map) {
