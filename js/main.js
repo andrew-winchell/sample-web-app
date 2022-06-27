@@ -95,48 +95,52 @@ require([
       }
     };
 
-    const feature = new Feature({
-      graphic: graphic,
-      map: VIEW.MAP,
-      spatialReference: view.spatialReference
-    });
+    function featureDetails(map) {
+      let view = map.view;
 
-    VIEW.ui.add(feature, "bottom-left");
+      const feature = new Feature({
+        graphic: graphic,
+        map: view.map,
+        spatialReference: view.spatialReference
+      });
 
-    VIEW.whenLayerView(fLayer).then((layerView) => {
-      let highlight;
-      let objectId;
+      view.ui.add(feature, "bottom-left");
 
-      const debouncedUpdate = promiseUtils.debounce((event) => {
-        // Perform a hitTest on the View
-        VIEW.hitTest(event).then((event) => {
-          // Make sure graphic has a popupTemplate
-          const results = event.results.filter((result) => {
-            return result.graphic.layer.popupTemplate;
+      view.whenLayerView(fLayer).then((layerView) => {
+        let highlight;
+        let objectId;
+
+        const debouncedUpdate = promiseUtils.debounce((event) => {
+          // Perform a hitTest on the View
+          view.hitTest(event).then((event) => {
+            // Make sure graphic has a popupTemplate
+            const results = event.results.filter((result) => {
+              return result.graphic.layer.popupTemplate;
+            });
+
+            const result = results[0];
+            const newObjectId =
+              result && result.graphic.attributes[fLayer.objectIdField];
+
+            if (!newObjectId) {
+              highlight && highlight.remove();
+              objectId = feature.graphic = null;
+            } else if (objectId !== newObjectId) {
+              highlight && highlight.remove();
+              objectId = newObjectId;
+              feature.graphic = result.graphic;
+              highlight = layerView.highlight(result.graphic);
+            }
           });
+        });
 
-          const result = results[0];
-          const newObjectId =
-            result && result.graphic.attributes[fLayer.objectIdField];
-
-          if (!newObjectId) {
-            highlight && highlight.remove();
-            objectId = feature.graphic = null;
-          } else if (objectId !== newObjectId) {
-            highlight && highlight.remove();
-            objectId = newObjectId;
-            feature.graphic = result.graphic;
-            highlight = layerView.highlight(result.graphic);
-          }
+        view.on("pointer-move", (event) => {
+          debouncedUpdate(event).catch((err) => {
+            if (!promiseUtils.isAbortError(err)) {
+              throw err;
+            }
+          });
         });
       });
-
-      VIEW.on("pointer-move", (event) => {
-        debouncedUpdate(event).catch((err) => {
-          if (!promiseUtils.isAbortError(err)) {
-            throw err;
-          }
-        });
-      });
-    });
+    }
 });
