@@ -82,7 +82,7 @@ require([
         url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_f02b435f02d74f4c94d3dc28796b84f8/FeatureServer"
       });
 
-      MASTERLAYER.setRefreshInterval(0.1);
+      MASTERLAYER.refreshInterval(0.1);
       map.add(MASTERLAYER);
     }
 
