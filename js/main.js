@@ -2,13 +2,13 @@ require([
     "esri/portal/Portal",
     "esri/identity/OAuthInfo",
     "esri/identity/IdentityManager",
-    "esri/portal/PortalQueryParams",
     "esri/config",
     "esri/Map",
     "esri/views/MapView",
+    "esri/views/FeatureLayer",
     "esri/widgets/BasemapGallery",
     "esri/widgets/Expand"
-], function (Portal, OAuthInfo, esriId, PortalQueryParams, esriConfig, Map, MapView, BasemapGallery, Expand) {
+], function (Portal, OAuthInfo, esriId, esriConfig, Map, MapView, FeatureLayer, BasemapGallery, Expand) {
     //Constants for the HTML div panels
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
@@ -27,29 +27,34 @@ require([
     
     esriId.checkSignInStatus(INFO.portalUrl + "/sharing").then(() => {
         displayMap();
-    }).catch(() => {
+    });/*.catch(() => {
         //If not signed in, display "sign-in" panel
-        anonPanelElement.style.display = "block";
+        anonPanelElement.style.display = "none";
         personalPanelElement.style.display = "none";
-    });
+    });*/
     
-    //Listen for click on the "Sign-In" div in html
-    //document.getElementById("sign-in").addEventListener("click", () => {
+    //Get AGOL credentials on startup
     esriId.getCredential(INFO.portalUrl + "/sharing");
-    //});
-    
-    //Listen for click on the "Sign-Out" div in html
 
     function displayMap() {
         //Initialize the map
         const MAP = new Map({
             basemap: "arcgis-dark-gray"
         });
+        
+        //Display main app html element
+        anonPanelElement.style.display = "none";
+        personalPanelElement.style.display = "block";
 
+        addWidgets(MAP);
+        addLayers(MAP);
+    }
+
+    function addWidgets(map) {
         //Set the map view
         const VIEW = new MapView({
             container: "viewDiv",
-            map: MAP,
+            map: map,
             center: [-88, 44],
             zoom: 4
         });
@@ -69,47 +74,13 @@ require([
         VIEW.ui.add([EXPAND], {
             position: "top-right"
         });
-        
-        anonPanelElement.style.display = "none";
-        personalPanelElement.style.display = "block";
     }
 
-      /*const portal = new Portal();
-      // Setting authMode to immediate signs the user in once loaded
-      portal.authMode = "immediate";
-      // Once loaded, user is signed in
-      portal.load().then(() => {
-        // Create query parameters for the portal search
-        const queryParams = new PortalQueryParams({
-          query: "owner:" + portal.user.username,
-          sortField: "numViews",
-          sortOrder: "desc",
-          num: 20
-        });
-    
-        userIdElement.innerHTML = portal.user.username;
-        anonPanelElement.style.display = "none";
-        personalPanelElement.style.display = "block";
-    
-        // Query the items based on the queryParams created from portal above
-        portal.queryItems(queryParams).then(createGallery);
-      });
+    function addLayers(map) {
+      const MASTERLAYER = new FeatureLayer({
+        // SITREP LAYER url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_dfbfd13d17b54fe4bc253c22e8af0620/FeatureServer"
+        url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_f02b435f02d74f4c94d3dc28796b84f8/FeatureServer"
+      }).addTo(map);
     }
 
-    function createGallery(items) {
-      let htmlFragment = "";
-
-      items.results.forEach((item) => {
-        htmlFragment +=
-          '<div class="esri-item-container">' +
-          (item.thumbnailUrl
-            ? '<div class="esri-image" style="background-image:url(' + item.thumbnailUrl + ');"></div>'
-            : '<div class="esri-image esri-null-image">Thumbnail not available</div>') +
-          (item.title
-            ? '<div class="esri-title">' + (item.title || "") + "</div>"
-            : '<div class="esri-title esri-null-title">Title not available</div>') +
-          "</div>";
-      });
-      document.getElementById("itemGallery").innerHTML = htmlFragment;
-    }*/
 });
