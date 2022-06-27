@@ -63,6 +63,19 @@ require([
         center: [39.8283, -98.5795],
         zoom: 3
       });
+
+      //Create a default graphic for when the app starts up
+      const GRAPHIC = {
+        popupTemplate: {
+          content: "Mouse over features to show details..."
+        }
+      };
+
+      const FEATURE = new Feature({
+        graphic: GRAPHIC,
+        map: VIEW.map,
+        spatialReference: VIEW.spatialReference
+      });
     }
 
     function addWidgets(map) {
