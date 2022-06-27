@@ -6,9 +6,10 @@ require([
     "esri/Map",
     "esri/views/MapView",
     "esri/layers/FeatureLayer",
+    "esri/widgets/Feature",
     "esri/widgets/BasemapGallery",
     "esri/widgets/Expand"
-], function (Portal, OAuthInfo, esriId, esriConfig, Map, MapView, FeatureLayer, BasemapGallery, Expand) {
+], function (Portal, OAuthInfo, esriId, esriConfig, Map, MapView, FeatureLayer, Feature, BasemapGallery, Expand) {
     //Constants for the HTML div panels
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
@@ -79,11 +80,62 @@ require([
     function addLayers(map) {
       const MASTERLAYER = new FeatureLayer({
         // SITREP LAYER url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_dfbfd13d17b54fe4bc253c22e8af0620/FeatureServer"
-        url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_f02b435f02d74f4c94d3dc28796b84f8/FeatureServer"
+        url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_f02b435f02d74f4c94d3dc28796b84f8/FeatureServer",
+        outFields: ["*"]
       });
 
-      MASTERLAYER.refreshInterval = 0.1;
+      //MASTERLAYER.refreshInterval = 0.1;
       map.add(MASTERLAYER);
     }
 
+    const graphic = {
+      popupTemplate: {
+        content: "Mouse over features to show details..."
+      }
+    };
+
+    const feature = new Feature({
+      graphic: graphic,
+      map: view.map,
+      spatialReference: view.spatialReference
+    });
+
+    view.ui.add(feature, "bottom-left");
+
+    view.whenLayerView(fLayer).then((layerView) => {
+      let highlight;
+      let objectId;
+
+      const debouncedUpdate = promiseUtils.debounce((event) => {
+        // Perform a hitTest on the View
+        view.hitTest(event).then((event) => {
+          // Make sure graphic has a popupTemplate
+          const results = event.results.filter((result) => {
+            return result.graphic.layer.popupTemplate;
+          });
+
+          const result = results[0];
+          const newObjectId =
+            result && result.graphic.attributes[fLayer.objectIdField];
+
+          if (!newObjectId) {
+            highlight && highlight.remove();
+            objectId = feature.graphic = null;
+          } else if (objectId !== newObjectId) {
+            highlight && highlight.remove();
+            objectId = newObjectId;
+            feature.graphic = result.graphic;
+            highlight = layerView.highlight(result.graphic);
+          }
+        });
+      });
+
+      view.on("pointer-move", (event) => {
+        debouncedUpdate(event).catch((err) => {
+          if (!promiseUtils.isAbortError(err)) {
+            throw err;
+          }
+        });
+      });
+    });
 });
