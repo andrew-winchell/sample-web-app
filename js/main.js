@@ -102,7 +102,6 @@ require([
             }
           });
         });
-
         VIEW.on("pointer-move", (event) => {
           DEBOUNCED_UPDATE(event).catch((err) => {
             if (!promiseUtils.isAbortError(err)) {
