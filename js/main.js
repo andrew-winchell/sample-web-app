@@ -2,8 +2,13 @@ require([
     "esri/portal/Portal",
     "esri/identity/OAuthInfo",
     "esri/identity/IdentityManager",
-    "esri/portal/PortalQueryParams"
-], function (Portal, OAuthInfo, esriId, PortalQueryParams) {
+    "esri/portal/PortalQueryParams",
+    "esri/config",
+    "esri/Map",
+    "esri/views/MapView",
+    "esri/widgets/BasemapGallery",
+    "esri/widgets/Expand"
+], function (Portal, OAuthInfo, esriId, PortalQueryParams, esriConfig, Map, MapView, BasemapGallery, Expand) {
     //Constants for the HTML div panels
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
@@ -21,7 +26,7 @@ require([
     esriId.registerOAuthInfos([INFO]);
 
     esriId.checkSignInStatus(INFO.portalUrl + "/sharing").then(() => {
-        displayItems();
+        displayMap();
     }).catch(() => {
         //If not signed in, display "sign-in" panel
         anonPanelElement.style.display = "block";
@@ -39,8 +44,38 @@ require([
         window.location.reload();
     });
 
-    function displayItems() {
-      const portal = new Portal();
+    function displayMap() {
+        //Initialize the map
+        const MAP = new Map({
+            basemap: "arcgis-dark-gray"
+        });
+
+        //Set the map view
+        const VIEW = new MapView({
+            container: "viewDiv",
+            map: MAP,
+            center: [-88, 44],
+            zoom: 4
+        });
+
+        //Initialize Basemap Gallery widget
+        const BASEMAPGALLERY = new BasemapGallery({
+            view: VIEW
+        });
+
+        //Initialize Expand widget
+        const EXPAND = new Expand({
+            view: VIEW,
+            content: BASEMAPGALLERY
+        });
+
+        //Add Basemap Gallery widget to map view
+        VIEW.ui.add([EXPAND], {
+            position: "top-right"
+        });
+    }
+
+      /*const portal = new Portal();
       // Setting authMode to immediate signs the user in once loaded
       portal.authMode = "immediate";
       // Once loaded, user is signed in
@@ -77,44 +112,5 @@ require([
           "</div>";
       });
       document.getElementById("itemGallery").innerHTML = htmlFragment;
-    }
-});
-
-
-require([
-        "esri/config",
-        "esri/Map",
-        "esri/views/MapView",
-        "esri/widgets/BasemapGallery",
-        "esri/widgets/Expand"
-], function (esriConfig, Map, MapView, BasemapGallery, Expand) {
-
-    //Initialize the map
-    const MAP = new Map({
-        basemap: "arcgis-dark-gray"
-    });
-
-    //Set the map view
-    const VIEW = new MapView({
-        container: "viewDiv",
-        map: MAP,
-        center: [-88, 44],
-        zoom: 4
-    });
-
-    //Initialize Basemap Gallery widget
-    const BASEMAPGALLERY = new BasemapGallery({
-        view: VIEW
-    });
-
-    //Initialize Expand widget
-    const EXPAND = new Expand({
-        view: VIEW,
-        content: BASEMAPGALLERY
-    });
-
-    //Add Basemap Gallery widget to map view
-    VIEW.ui.add([EXPAND], {
-        position: "top-right"
-    });
+    }*/
 });
