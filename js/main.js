@@ -56,7 +56,6 @@ require([
       //Initialize new Map constant
       const MAP = new Map({
         basemap: "arcgis-dark-gray",
-        layers: [LAYER]
       });
 
       //Initialize new MapView constant
