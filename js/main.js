@@ -87,6 +87,8 @@ require([
 
       //MASTERLAYER.refreshInterval = 0.1;
       map.add(MASTERLAYER);
+
+      featureDetails(map);
     }
 
     const graphic = {
