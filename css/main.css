@@ -1,8 +1,15 @@
-html, body{
+html, body {
     width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
+}
+
+#personalizedPanel, #anonymousPanel {
+    height: 100%;
+    width: 100%;
+    display: none;
+    padding: 5px;
 }
 
 #mainDiv {
