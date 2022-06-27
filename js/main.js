@@ -60,7 +60,7 @@ require([
         container: "viewDiv",
         map: MAP,
         center: [-98.5795, 39.8283],
-        zoom: 4
+        zoom: 3
       });
 
       const GRAPHIC = {
@@ -76,6 +76,22 @@ require([
       });
 
       VIEW.ui.add(FEATURE, "bottom-left");
+
+      VIEW.whenLayerView(LAYER).then((layerView) => {
+        let highlight;
+        let objectId;
+
+        const DEBOUNCED_UPDATE = promiseUtils.debounce((event) => {
+          VIEW.hitTest(event).then((event) => {
+            const RESULTS = event.results.filter((result) => {
+              return result.graphic.layer.popupTemplate;
+            });
+
+            const RESULT = RESULTS[0];
+            const NEWOBJECTID = RESULT && RESULT.graphic.attributes[LAYER.objectIdField];
+          })
+        })
+      })
 
     }
 
