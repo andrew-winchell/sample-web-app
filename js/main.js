@@ -15,26 +15,6 @@ require([
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
     const userIdElement = document.getElementById("userId");
-  
-    //Initialize the map
-    const MAP = new Map({
-      basemap: "arcgis-dark-gray",
-      layer: [MASTERLAYER]
-    });
-
-    //Set the map view
-    const VIEW = new MapView({
-        container: "viewDiv",
-        map: MAP,
-        center: [-88, 44],
-        zoom: 4
-    });
-    
-    const MASTERLAYER = new FeatureLayer({
-      // SITREP LAYER url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_dfbfd13d17b54fe4bc253c22e8af0620/FeatureServer"
-      url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_f02b435f02d74f4c94d3dc28796b84f8/FeatureServer",
-      outFields: ["*"]
-    });
 
     //OAuth constant linking to registered AGOL application and logging to Cobec portal
     const INFO = new OAuthInfo({
@@ -48,7 +28,7 @@ require([
     esriId.registerOAuthInfos([INFO]);
     
     esriId.checkSignInStatus(INFO.portalUrl + "/sharing").then(() => {
-        displayMap(MAP, VIEW);
+        initializeApp();
     });/*.catch(() => {
         //If not signed in, display "sign-in" panel
         anonPanelElement.style.display = "none";
@@ -58,81 +38,53 @@ require([
     //Get AGOL credentials on startup
     esriId.getCredential(INFO.portalUrl + "/sharing");
 
-    function displayMap(map, view) {
-        //Display main app html element
-        anonPanelElement.style.display = "none";
-        personalPanelElement.style.display = "block";
+    function initializeApp() {
+      //Change display to main app display
+      anonPanelElement.style.display = "none";
+      personalPanelElement.style.display = "block";
 
-        addWidgets(map, view);
+      //Initialize new FeatureLayer constant
+      const LAYER = new FeatureLayer({
+        // SITREP LAYER url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_dfbfd13d17b54fe4bc253c22e8af0620/FeatureServer"
+        url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_f02b435f02d74f4c94d3dc28796b84f8/FeatureServer",
+        outFields: ["*"]
+      });
+
+      LAYER.when(() => {
+        return LAYER.queryExtent();
+      }).then((response) => {
+        VIEW.goTo(response.extent);
+      });
+
+      //Initialize new Map constant
+      const MAP = new Map({
+        basemap: "arcgis-dark-gray",
+        layers: [LAYER]
+      });
+
+      //Initialize new MapView constant
+      const VIEW = new MapView ({
+        container: "viewDiv",
+        map: MAP
+      });
     }
 
-    function addWidgets(map, view) {
-
+    function addWidgets(map) {
         //Initialize Basemap Gallery widget
         const BASEMAPGALLERY = new BasemapGallery({
-            view: view
+            view: VIEW
         });
 
         //Initialize Expand widget
         const EXPAND = new Expand({
-            view: view,
+            view: VIEW,
             content: BASEMAPGALLERY
         });
 
         //Add Basemap Gallery widget to map view
-        view.ui.add([EXPAND], {
+        VIEW.ui.add([EXPAND], {
             position: "top-right"
         });
     }
 
-    const graphic = {
-      popupTemplate: {
-        content: "Mouse over features to show details..."
-      }
-    };
-
-    const feature = new Feature({
-      graphic: graphic,
-      map: VIEW.map,
-      spatialReference: VIEW.spatialReference
-    });
-
-    VIEW.ui.add(feature, "bottom-left");
-
-    VIEW.whenLayerView(MASTERLAYER).then((layerView) => {
-      let highlight;
-      let objectId;
-
-      const debouncedUpdate = promiseUtils.debounce((event) => {
-        // Perform a hitTest on the View
-        VIEW.hitTest(event).then((event) => {
-          // Make sure graphic has a popupTemplate
-          const results = event.results.filter((result) => {
-            return result.graphic.layer.popupTemplate;
-          });
-
-          const result = results[0];
-          const newObjectId =
-            result && result.graphic.attributes[MASTERLAYER.objectIdField];
-
-          if (!newObjectId) {
-            highlight && highlight.remove();
-            objectId = feature.graphic = null;
-          } else if (objectId !== newObjectId) {
-            highlight && highlight.remove();
-            objectId = newObjectId;
-            feature.graphic = result.graphic;
-            highlight = layerView.highlight(result.graphic);
-          }
-        });
-      });
-
-      VIEW.on("pointer-move", (event) => {
-        debouncedUpdate(event).catch((err) => {
-          if (!promiseUtils.isAbortError(err)) {
-            throw err;
-          }
-        });
-      });
-    });
 });
