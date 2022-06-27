@@ -76,6 +76,8 @@ require([
         map: VIEW.map,
         spatialReference: VIEW.spatialReference
       });
+
+      VIEW.ui.add(FEATURE, "bottom-left");
     }
 
     function addWidgets(map) {
