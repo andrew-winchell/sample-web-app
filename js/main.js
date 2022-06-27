@@ -66,7 +66,7 @@ require([
         zoom: 3
       });
 
-      //Create a default graphic for when the app starts up
+      /*//Create a default graphic for when the app starts up
       const GRAPHIC = {
         popupTemplate: {
           content: "Mouse over features to show details..."
@@ -79,7 +79,7 @@ require([
       });
 
       VIEW.ui.add(FEATURE, "bottom-left");
-    }
+    }*/
 
     function addWidgets(map) {
         //Initialize Basemap Gallery widget
