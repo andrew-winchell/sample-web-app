@@ -24,7 +24,7 @@ require([
     });
 
     esriId.registerOAuthInfos([INFO]);
-    esriId.checkSignInStatus(INFO.portalUrl + "/sharing")
+    
     esriId.checkSignInStatus(INFO.portalUrl + "/sharing").then(() => {
         displayMap();
     }).catch(() => {
@@ -34,9 +34,9 @@ require([
     });
     
     //Listen for click on the "Sign-In" div in html
-    document.getElementById("sign-in").addEventListener("click", () => {
-        esriId.getCredential(INFO.portalUrl + "/sharing");
-    });
+    //document.getElementById("sign-in").addEventListener("click", () => {
+    esriId.getCredential(INFO.portalUrl + "/sharing");
+    //});
     
     //Listen for click on the "Sign-Out" div in html
 
