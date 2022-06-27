@@ -47,6 +47,7 @@ require([
       const LAYER = new FeatureLayer({
         // SITREP LAYER url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_dfbfd13d17b54fe4bc253c22e8af0620/FeatureServer"
         url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_f02b435f02d74f4c94d3dc28796b84f8/FeatureServer",
+        outFields: ["*"]
       });
 
       //Initialize new Map constant
