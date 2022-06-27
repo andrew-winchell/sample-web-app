@@ -5,7 +5,7 @@ require([
     "esri/config",
     "esri/Map",
     "esri/views/MapView",
-    "esri/views/FeatureLayer",
+    "esri/layers/FeatureLayer",
     "esri/widgets/BasemapGallery",
     "esri/widgets/Expand"
 ], function (Portal, OAuthInfo, esriId, esriConfig, Map, MapView, FeatureLayer, BasemapGallery, Expand) {
