@@ -75,8 +75,7 @@ require([
 
       const FEATURE = new Feature({
         graphic: GRAPHIC,
-        map: VIEW.map,
-        spatialReference: VIEW.spatialReference
+        map: VIEW.map
       });
 
       VIEW.ui.add(FEATURE, "bottom-left");
