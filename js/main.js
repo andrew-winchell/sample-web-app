@@ -39,10 +39,6 @@ require([
     });
     
     //Listen for click on the "Sign-Out" div in html
-    document.getElementById("sign-out").addEventListener("click", () => {
-        esriId.destroyCredentials();
-        window.location.reload();
-    });
 
     function displayMap() {
         //Initialize the map
