@@ -98,5 +98,4 @@ require([
             position: "top-right"
         });
     }
-
 });
