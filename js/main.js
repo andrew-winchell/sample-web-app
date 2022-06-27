@@ -1,4 +1,5 @@
 require([
+  "esri/core/promiseUtils",
     "esri/portal/Portal",
     "esri/identity/OAuthInfo",
     "esri/identity/IdentityManager",
@@ -9,7 +10,7 @@ require([
     "esri/widgets/Feature",
     "esri/widgets/BasemapGallery",
     "esri/widgets/Expand"
-], function (Portal, OAuthInfo, esriId, esriConfig, Map, MapView, FeatureLayer, Feature, BasemapGallery, Expand) {
+], function (promiseUtils, Portal, OAuthInfo, esriId, esriConfig, Map, MapView, FeatureLayer, Feature, BasemapGallery, Expand) {
     //Constants for the HTML div panels
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
@@ -96,19 +97,19 @@ require([
 
     const feature = new Feature({
       graphic: graphic,
-      map: view.map,
+      map: VIEW.MAP,
       spatialReference: view.spatialReference
     });
 
-    view.ui.add(feature, "bottom-left");
+    VIEW.ui.add(feature, "bottom-left");
 
-    view.whenLayerView(fLayer).then((layerView) => {
+    VIEW.whenLayerView(fLayer).then((layerView) => {
       let highlight;
       let objectId;
 
       const debouncedUpdate = promiseUtils.debounce((event) => {
         // Perform a hitTest on the View
-        view.hitTest(event).then((event) => {
+        VIEW.hitTest(event).then((event) => {
           // Make sure graphic has a popupTemplate
           const results = event.results.filter((result) => {
             return result.graphic.layer.popupTemplate;
@@ -130,7 +131,7 @@ require([
         });
       });
 
-      view.on("pointer-move", (event) => {
+      VIEW.on("pointer-move", (event) => {
         debouncedUpdate(event).catch((err) => {
           if (!promiseUtils.isAbortError(err)) {
             throw err;
