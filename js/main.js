@@ -18,7 +18,8 @@ require([
   
     //Initialize the map
     const MAP = new Map({
-    basemap: "arcgis-dark-gray"
+      basemap: "arcgis-dark-gray",
+      layer: [MASTERLAYER]
     });
 
     //Set the map view
@@ -47,7 +48,7 @@ require([
     esriId.registerOAuthInfos([INFO]);
     
     esriId.checkSignInStatus(INFO.portalUrl + "/sharing").then(() => {
-        displayMap(MAP, VIEW, MASTERLAYER);
+        displayMap(MAP, VIEW);
     });/*.catch(() => {
         //If not signed in, display "sign-in" panel
         anonPanelElement.style.display = "none";
@@ -57,13 +58,12 @@ require([
     //Get AGOL credentials on startup
     esriId.getCredential(INFO.portalUrl + "/sharing");
 
-    function displayMap(map, view, fLayer) {
+    function displayMap(map, view) {
         //Display main app html element
         anonPanelElement.style.display = "none";
         personalPanelElement.style.display = "block";
 
         addWidgets(map, view);
-        addLayers(map, fLayer);
     }
 
     function addWidgets(map, view) {
@@ -85,12 +85,6 @@ require([
         });
     }
 
-    function addLayers(map, fLayer) {
-
-      //MASTERLAYER.refreshInterval = 0.1;
-      map.add(fLayer);
-    }
-
     const graphic = {
       popupTemplate: {
         content: "Mouse over features to show details..."
@@ -105,7 +99,7 @@ require([
 
     VIEW.ui.add(feature, "bottom-left");
 
-    VIEW.whenLayerView().then((layerView) => {
+    VIEW.whenLayerView(MASTERLAYER).then((layerView) => {
       let highlight;
       let objectId;
 
@@ -119,7 +113,7 @@ require([
 
           const result = results[0];
           const newObjectId =
-            result && result.graphic.attributes[fLayer.objectIdField];
+            result && result.graphic.attributes[MASTERLAYER.objectIdField];
 
           if (!newObjectId) {
             highlight && highlight.remove();
