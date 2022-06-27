@@ -78,8 +78,8 @@ require([
         map: VIEW.map
       });
 
-      VIEW.ui.add(FEATURE, "bottom-left");
-    }*/
+      VIEW.ui.add(FEATURE, "bottom-left");*/
+    }
 
     function addWidgets(map) {
         //Initialize Basemap Gallery widget
