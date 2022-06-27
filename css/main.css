@@ -5,6 +5,12 @@ html, body {
     margin: 0;
 }
 
+.action {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 #personalizedPanel, #anonymousPanel {
     height: 100%;
     width: 100%;
