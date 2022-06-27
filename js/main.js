@@ -27,6 +27,9 @@ require([
 
     esriId.registerOAuthInfos([INFO]);
     
+    //Get AGOL credentials on startup
+    esriId.getCredential(INFO.portalUrl + "/sharing");
+    
     esriId.checkSignInStatus(INFO.portalUrl + "/sharing").then(() => {
         initializeApp();
     });/*.catch(() => {
@@ -34,9 +37,6 @@ require([
         anonPanelElement.style.display = "none";
         personalPanelElement.style.display = "none";
     });*/
-    
-    //Get AGOL credentials on startup
-    esriId.getCredential(INFO.portalUrl + "/sharing");
 
     function initializeApp() {
       //Change display to main app display
@@ -61,5 +61,23 @@ require([
         center: [39.8283, -98.5795],
         zoom: 3
       });
+    }
+
+    function addWidgets(map) {
+        //Initialize Basemap Gallery widget
+        const BASEMAPGALLERY = new BasemapGallery({
+            view: VIEW
+        });
+
+        //Initialize Expand widget
+        const EXPAND = new Expand({
+            view: VIEW,
+            content: BASEMAPGALLERY
+        });
+
+        //Add Basemap Gallery widget to map view
+        VIEW.ui.add([EXPAND], {
+            position: "top-right"
+        });
     }
 });
