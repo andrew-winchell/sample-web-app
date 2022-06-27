@@ -89,9 +89,27 @@ require([
 
             const RESULT = RESULTS[0];
             const NEWOBJECTID = RESULT && RESULT.graphic.attributes[LAYER.objectIdField];
-          })
-        })
-      })
+
+            if (!NEWOBJECTID) {
+              highlight && highlight.remove();
+              objectId = FEATURE.graphic = null;
+            } else if (objectId !== NEWOBJECTID) {
+              highlight && highlight.remove();
+              objectId = NEWOBJECTID;
+              FEATURE.graphic = RESULT.graphic;
+              highlight = layerView.highlight(RESULT.graphic);
+            }
+          });
+        });
+
+        VIEW.on("pointer-move", (event) => {
+          DEBOUNCED_UPDATE(event).catch((err) => {
+            if (!promiseUtils.isAbortError(err)) {
+              throw err;
+            }
+          });
+        });
+      });
 
     }
 
