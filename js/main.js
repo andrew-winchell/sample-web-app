@@ -24,7 +24,7 @@ require([
     });
 
     esriId.registerOAuthInfos([INFO]);
-
+    esriId.checkSignInStatus(INFO.portalUrl + "/sharing")
     esriId.checkSignInStatus(INFO.portalUrl + "/sharing").then(() => {
         displayMap();
     }).catch(() => {
