@@ -81,7 +81,7 @@ require([
 
       VIEW.ui.add(feature, "bottom-left");
 
-      VIEW.whenLayerView(feature).then((layerView) => {
+      VIEW.whenLayerView(LAYER).then((layerView) => {
         let highlight;
         let objectId;
 
