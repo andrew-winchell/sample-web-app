@@ -66,56 +66,7 @@ require([
         center: [-98.5795, 39.8283],
         zoom: 3
       });
-
-      const graphic = {
-        popupTemplate: {
-          content: "Origination Content"
-        }
-      };
-
-      const feature = new Feature({
-        graphic: graphic,
-        map: VIEW.map,
-        spatialReference: VIEW.spatialReference
-      });
-
-      VIEW.ui.add(feature, "bottom-left");
-
-      VIEW.whenLayerView(LAYER).then((layerView) => {
-        let highlight;
-        let objectId;
-
-        const debouncedUpdate = promiseUtils.debounce((event) => {
-          VIEW.hitTest(event)
-            .then((event) => {
-              const results = event.results.filter((result) => {
-                return result.graphic.layer.popupTemplate;
-              });
-
-              const result = results[0];
-              const newObjectId = result && result.graphic.attributes[LAYER.fields.objectid];
-
-              if(!newObjectId) {
-                highlight && highlight.remove();
-                objectId = feature.graphic = null;
-              } else if (objectId !== newObjectId) {
-                highlight && highlight.remove();
-                objectId = newObjectId;
-                feature.graphic = result.graphic;
-                highlight = layerView.highlight(result.graphic);
-              }
-            });
-        });
-
-        VIEW.on("pointer-move", (event) => {
-          debouncedUpdate(event).catch((err) => {
-            if (!promiseUtils.isAbortError(err)) {
-              throw err;
-            }
-          });
-        });
-      });
-
+      
       addWidgets(VIEW);
     }
 
