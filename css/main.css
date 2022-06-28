@@ -49,14 +49,16 @@ html, body {
 }
 
 #sidePanel {
-    height: auto;
-    width: 300px;
+    width: 0;
     position: relative;
-    background-color: blanchedalmond;
     z-index: 1;
-    margin: 10px;
+    height: auto;
     top: 0;
     left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
 }
 
 #viewDiv {
