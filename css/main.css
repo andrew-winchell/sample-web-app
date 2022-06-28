@@ -46,6 +46,7 @@ html, body {
     flex-flow: row;
     overflow: hidden;
     position: relative;
+    flex-wrap: wrap;
 }
 
 #sidePanel {
