@@ -4,13 +4,13 @@ require([
     "esri/identity/OAuthInfo",
     "esri/identity/IdentityManager",
     "esri/config",
-    "esri/WebMap",
+    "esri/Map",
     "esri/views/MapView",
     "esri/layers/FeatureLayer",
     "esri/widgets/Feature",
     "esri/widgets/BasemapGallery",
     "esri/widgets/Expand"
-], function (promiseUtils, Portal, OAuthInfo, esriId, esriConfig, WebMap, MapView, FeatureLayer, Feature, BasemapGallery, Expand) {
+], function (promiseUtils, Portal, OAuthInfo, esriId, esriConfig, Map, MapView, FeatureLayer, Feature, BasemapGallery, Expand) {
     //Constants for the HTML div panels
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
@@ -53,17 +53,13 @@ require([
       });
 
       //Initialize new Map constant
-      const MAP = new WebMap({
-        portalItem: {
-          // autocasts as new PortalItem
-          id: "f8d32d3efe034e20acc33282e63de6fb"
-        },
-        //basemap: "arcgis-dark-gray",
+      const MAP = new Map({
+        basemap: "arcgis-dark-gray",
         layers: [LAYER]
       });
 
       //Initialize new MapView constant
-      const VIEW = new MapView ({
+      var VIEW = new MapView ({
         container: "viewDiv",
         map: MAP,
         center: [-98.5795, 39.8283],
@@ -72,55 +68,6 @@ require([
           autoOpenEnabled: false
         }
       });
-
-      VIEW.when().then(() => {
-        // Create a default graphic for when the application starts
-        const graphic = {
-          popupTemplate: {
-            content: "Mouse over features to show details..."
-          }
-        };
-
-        // Provide graphic to a new instance of a Feature widget
-        const feature = new Feature({
-          container: "featureDetailsDiv",
-          graphic: graphic,
-          map: VIEW.map,
-          spatialReference: VIEW.spatialReference
-        });
-
-        VIEW.whenLayerView(LAYER).then((layerView) => {
-          let highlight;
-          // listen for the pointer-move event on the View
-          VIEW.on("pointer-move", (event) => {
-            // Perform a hitTest on the View
-            VIEW.hitTest(event).then((event) => {
-              // Make sure graphic has a popupTemplate
-              const results = event.results.filter((result) => {
-                return result.graphic.layer.popupTemplate;
-              });
-              const result = results[0];
-              highlight && highlight.remove();
-              // Update the graphic of the Feature widget
-              // on pointer-move with the result
-              if (result) {
-                feature.graphic = result.graphic;
-                highlight = layerView.highlight(result.graphic);
-              } else {
-                feature.graphic = graphic;
-              }
-            });
-          });
-        });
-      });
-
-
-
-
-
-
-
-      
       addWidgets(VIEW);
     }
 
@@ -141,4 +88,45 @@ require([
             position: "top-right"
         });
     }
+
+    VIEW.when().then(() => {
+      // Create a default graphic for when the application starts
+      const graphic = {
+        popupTemplate: {
+          content: "Mouse over features to show details..."
+        }
+      };
+
+      // Provide graphic to a new instance of a Feature widget
+      const feature = new Feature({
+        container: "featureDetailsDiv",
+        graphic: graphic,
+        map: VIEW.map,
+        spatialReference: VIEW.spatialReference
+      });
+
+      VIEW.whenLayerView(LAYER).then((layerView) => {
+        let highlight;
+        // listen for the pointer-move event on the View
+        VIEW.on("pointer-move", (event) => {
+          // Perform a hitTest on the View
+          VIEW.hitTest(event).then((event) => {
+            // Make sure graphic has a popupTemplate
+            const results = event.results.filter((result) => {
+              return result.graphic.layer.popupTemplate;
+            });
+            const result = results[0];
+            highlight && highlight.remove();
+            // Update the graphic of the Feature widget
+            // on pointer-move with the result
+            if (result) {
+              feature.graphic = result.graphic;
+              highlight = layerView.highlight(result.graphic);
+            } else {
+              feature.graphic = graphic;
+            }
+          });
+        });
+      });
+    });
 });
