@@ -87,6 +87,14 @@ require([
 
         const debouncedUpdate = promiseUtils.debounce((event) => {
           VIEW.hitTest(event)
+            .then((event) => {
+              const results = event.results.filter((result) => {
+                return result.graphic.layer.popupTemplate;
+              });
+
+              const result = results[0];
+              const newObjectId = result && result.graphic.attributes[LAYER.objectid];
+            })
         })
 
       });
