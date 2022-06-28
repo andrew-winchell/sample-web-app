@@ -77,7 +77,8 @@ html, body {
 }
 
 #footerDiv {
-    width: 80%;
+    width: 100%;
     height: auto;
     margin: 10px;
+    float: inline-end;
 }
