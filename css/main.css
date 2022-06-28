@@ -51,7 +51,8 @@ html, body {
 #sidePanel {
     height: auto;
     width: 200px;
-    position: fixed;
+    position: relative;
+    background-color: blanchedalmond;
     z-index: 1;
     margin: 10px;
     top: 0;
