@@ -4,7 +4,7 @@ require([
     "esri/identity/OAuthInfo",
     "esri/identity/IdentityManager",
     "esri/config",
-    "esri/Map",
+    "esri/WebMap",
     "esri/views/MapView",
     "esri/layers/FeatureLayer",
     "esri/widgets/Feature",
@@ -53,8 +53,12 @@ require([
       });
 
       //Initialize new Map constant
-      const MAP = new Map({
-        basemap: "arcgis-dark-gray",
+      const MAP = new WebMap({
+        portalItem: {
+          // autocasts as new PortalItem
+          id: "f8d32d3efe034e20acc33282e63de6fb"
+        },
+        //basemap: "arcgis-dark-gray",
         layers: [LAYER]
       });
 
