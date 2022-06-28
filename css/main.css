@@ -47,16 +47,25 @@ html, body {
     position: relative;
 }
 
+#sidePanel {
+    height: auto;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    margin: 10px;
+    top: 0;
+    left: 0;
+}
+
 #viewDiv {
-    min-width: 40%;
-    max-width: 100%;
+    width: 100%;
     height: auto;
     margin: 10px;
     float: left;
 }
 
 #featureDetailsDiv {
-    width: 300px;
+    width: 600px;
     height: auto;
     overflow-y: scroll;
     margin: 10px;
