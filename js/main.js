@@ -43,13 +43,16 @@ require([
       personalPanelElement.style.display = "block";
 
       //Initialize new FeatureLayer constant
-      const LAYER = new FeatureLayer({
+      const LAYER = new FeatureLayer(
         // SITREP LAYER url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_dfbfd13d17b54fe4bc253c22e8af0620/FeatureServer"
-        url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_f02b435f02d74f4c94d3dc28796b84f8/FeatureServer/0"
-      });
-      var LAYOUT = LAYER.fields;
+        "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_f02b435f02d74f4c94d3dc28796b84f8/FeatureServer/0",
+        {
+          mode: FeatureLayer.MODE_AUTO,
+          outFields: ["*"]
+        }
+      );
       
-      console.log(LAYOUT);
+      console.log(LAYOUT.outFields);
 
       //Initialize new Map constant
       const MAP = new Map({
