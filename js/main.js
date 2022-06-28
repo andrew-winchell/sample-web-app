@@ -116,7 +116,7 @@ require([
 
             const result = results[0];
             const newObjectId =
-              result && result.graphic.attributes[fLayer.objectIdField];
+              result && result.graphic.attributes[traconLayer.objectIdField];
 
             if (!newObjectId) {
               highlight && highlight.remove();
