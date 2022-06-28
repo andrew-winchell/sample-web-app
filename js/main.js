@@ -81,6 +81,16 @@ require([
 
       VIEW.ui.add(feature, "bottom-left");
 
+      VIEW.whenLayerView(feature).then((layerView) => {
+        let highlight;
+        let objectId;
+
+        const debouncedUpdate = promiseUtils.debounce((event) => {
+          VIEW.hitTest(event)
+        })
+
+      });
+
       addWidgets(MAP);
     }
 
