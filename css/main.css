@@ -43,6 +43,8 @@ html, body {
     flex-grow: 1;
     display: flex;
     flex-flow: row;
+    overflow: hidden;
+    position: relative;
 }
 
 #viewDiv {
@@ -50,8 +52,6 @@ html, body {
     height: auto;
     margin: 10px;
     float: left;
-    overflow: hidden;
-    position: relative;
 }
 
 #featureDetailsDiv {
