@@ -10,7 +10,7 @@ require([
     "esri/widgets/Feature",
     "esri/widgets/BasemapGallery",
     "esri/widgets/Expand"
-], function (promiseUtils, Portal, OAuthInfo, esriId, esriConfig, Map, MapView, FeatureLayer, Feature, BasemapGallery, Expand) {
+], function (promiseUtils, Portal, OAuthInfo, esriId, esriConfig, WebMap, MapView, FeatureLayer, Feature, BasemapGallery, Expand) {
     //Constants for the HTML div panels
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
