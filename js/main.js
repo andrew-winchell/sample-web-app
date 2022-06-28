@@ -104,39 +104,42 @@ require([
 
       view.whenLayerView(traconLayer).then((layerView) => {
         let highlight;
-        // listen for the pointer-move event on the View
-        view.on("pointer-move", (event) => {
+        let objectId;
+
+        const debouncedUpdate = promiseUtils.debounce((event) => {
           // Perform a hitTest on the View
           view.hitTest(event).then((event) => {
-            console.log("HIT");
             // Make sure graphic has a popupTemplate
             const results = event.results.filter((result) => {
               return result.graphic.layer.popupTemplate;
             });
+
             const result = results[0];
-            highlight && highlight.remove();
-            // Update the graphic of the Feature widget
-            // on pointer-move with the result
-            if (result) {
+            const newObjectId =
+              result && result.graphic.attributes[fLayer.objectIdField];
+
+            if (!newObjectId) {
+              highlight && highlight.remove();
+              objectId = feature.graphic = null;
+            } else if (objectId !== newObjectId) {
+              highlight && highlight.remove();
+              objectId = newObjectId;
               feature.graphic = result.graphic;
               highlight = layerView.highlight(result.graphic);
-            } else {
-              feature.graphic = graphic;
+            }
+          });
+        });
+
+        // Listen for the pointer-move event on the View
+        // and make sure that function is not invoked more
+        // than one at a time
+        view.on("pointer-move", (event) => {
+          debouncedUpdate(event).catch((err) => {
+            if (!promiseUtils.isAbortError(err)) {
+              throw err;
             }
           });
         });
       });
-
-      // Listen for the pointer-move event on the View
-      // and make sure that function is not invoked more
-      // than one at a time
-      view.on("pointer-move", (event) => {
-        debouncedUpdate(event).catch((err) => {
-          if (!promiseUtils.isAbortError(err)) {
-            throw err;
-          }
-        });
-      });
-
     });
 });
