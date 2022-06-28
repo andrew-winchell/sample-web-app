@@ -14,9 +14,6 @@ require([
     //Constants for the HTML div panels
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
-    var LAYER;
-    var MAP;
-    var VIEW;
 
     //OAuth constant linking to registered AGOL application and logging to Cobec portal
     const INFO = new OAuthInfo({
@@ -33,77 +30,46 @@ require([
     esriId.getCredential(INFO.portalUrl + "/sharing");
     
     esriId.checkSignInStatus(INFO.portalUrl + "/sharing").then(() => {
-        //initializeApp();
-        //Change display to main app display
-        anonPanelElement.style.display = "none";
-        personalPanelElement.style.display = "block";
-
-        //Initialize new FeatureLayer constant
-        LAYER = new FeatureLayer({
-          // SITREP LAYER url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_dfbfd13d17b54fe4bc253c22e8af0620/FeatureServer"
-          portalItem: {
-            id: "383ab9e4787c4f8db81bd54988142db0"
-          },
-          layerId: 0,
-          outFields: ["*"]
-        });
-
-        //Initialize new Map constant
-        MAP = new Map({
-          basemap: "arcgis-dark-gray",
-          layers: [LAYER]
-        });
-
-        //Initialize new MapView constant
-        VIEW = new MapView ({
-          container: "viewDiv",
-          map: MAP,
-          center: [-98.5795, 39.8283],
-          zoom: 3,
-          popup: {
-            autoOpenEnabled: false
-          }
-        });
-        addWidgets();
+        initializeApp();
     });/*.catch(() => {
         //If not signed in, display "sign-in" panel
         anonPanelElement.style.display = "none";
         personalPanelElement.style.display = "none";
     });*/
 
-    /*function initializeApp() {
+    //Initialize new FeatureLayer constant
+    const LAYER = new FeatureLayer({
+      // SITREP LAYER url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_dfbfd13d17b54fe4bc253c22e8af0620/FeatureServer"
+      portalItem: {
+        id: "383ab9e4787c4f8db81bd54988142db0"
+      },
+      layerId: 0,
+      outFields: ["*"]
+    });
+
+    //Initialize new Map constant
+    const MAP = new Map({
+      basemap: "arcgis-dark-gray",
+      layers: [LAYER]
+    });
+
+    //Initialize new MapView constant
+    const VIEW = new MapView ({
+      container: "viewDiv",
+      map: MAP,
+      center: [-98.5795, 39.8283],
+      zoom: 3,
+      popup: {
+        autoOpenEnabled: false
+      }
+    });
+
+    function initializeApp() {
       //Change display to main app display
       anonPanelElement.style.display = "none";
       personalPanelElement.style.display = "block";
-
-      //Initialize new FeatureLayer constant
-      LAYER = new FeatureLayer({
-        // SITREP LAYER url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_dfbfd13d17b54fe4bc253c22e8af0620/FeatureServer"
-        portalItem: {
-          id: "383ab9e4787c4f8db81bd54988142db0"
-        },
-        layerId: 0,
-        outFields: ["*"]
-      });
-
-      //Initialize new Map constant
-      MAP = new Map({
-        basemap: "arcgis-dark-gray",
-        layers: [LAYER]
-      });
-
-      //Initialize new MapView constant
-      VIEW = new MapView ({
-        container: "viewDiv",
-        map: MAP,
-        center: [-98.5795, 39.8283],
-        zoom: 3,
-        popup: {
-          autoOpenEnabled: false
-        }
-      });
       addWidgets();
-    }*/
+    }
 
     function addWidgets() {
         //Initialize Basemap Gallery widget
