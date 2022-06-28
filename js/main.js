@@ -92,7 +92,7 @@ require([
         });
     }
 
-    VIEW.when().then(() => {
+    VIEW.when(initializeApp).then(() => {
       // Create a default graphic for when the application starts
       const graphic = {
         popupTemplate: {
