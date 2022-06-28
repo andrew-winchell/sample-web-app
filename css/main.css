@@ -61,14 +61,14 @@ html, body {
 
 #viewDiv {
     width: 100%;
-    height: auto;
+    height: 80%;
     margin: 10px;
     float: left;
 }
 
 #featureDetailsDiv {
     width: 600px;
-    height: auto;
+    height: 80%;
     overflow-y: scroll;
     margin: 10px;
     right: 0;
@@ -78,6 +78,6 @@ html, body {
 
 #footerDiv {
     width: 80%;
-    height: 20%;
+    height: auto;
     margin: 10px;
 }
