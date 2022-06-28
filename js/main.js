@@ -14,7 +14,6 @@ require([
     //Constants for the HTML div panels
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
-    const userIdElement = document.getElementById("userId");
 
     //OAuth constant linking to registered AGOL application and logging to Cobec portal
     const INFO = new OAuthInfo({
@@ -49,6 +48,7 @@ require([
         url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_f02b435f02d74f4c94d3dc28796b84f8/FeatureServer/0",
         outFields: ["*"]
       });
+      console.log(LAYER.outFields);
 
       //Initialize new Map constant
       const MAP = new Map({
