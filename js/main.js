@@ -1,4 +1,5 @@
 require([
+    "esri/core/promiseUtils",
     "esri/identity/OAuthInfo",
     "esri/identity/IdentityManager",
     "esri/WebMap",
@@ -7,7 +8,7 @@ require([
     "esri/widgets/Feature",
     "esri/widgets/BasemapGallery",
     "esri/widgets/Expand"
-], function (OAuthInfo, esriId, WebMap, MapView, FeatureLayer, Feature, BasemapGallery, Expand) {
+], function (promiseUtils, OAuthInfo, esriId, WebMap, MapView, FeatureLayer, Feature, BasemapGallery, Expand) {
     //Constants for the HTML div panels
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
@@ -125,5 +126,17 @@ require([
           });
         });
       });
+
+      // Listen for the pointer-move event on the View
+      // and make sure that function is not invoked more
+      // than one at a time
+      view.on("pointer-move", (event) => {
+        debouncedUpdate(event).catch((err) => {
+          if (!promiseUtils.isAbortError(err)) {
+            throw err;
+          }
+        });
+      });
+
     });
 });
