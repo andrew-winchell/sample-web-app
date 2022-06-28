@@ -64,8 +64,6 @@ require([
       }
     });
 
-    console.log(typeof(VIEW));
-
     function initializeApp() {
       //Change display to main app display
       anonPanelElement.style.display = "none";
