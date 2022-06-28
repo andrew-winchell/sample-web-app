@@ -37,13 +37,14 @@ require([
         personalPanelElement.style.display = "none";
     });*/
 
+    var LAYER;
     function initializeApp() {
       //Change display to main app display
       anonPanelElement.style.display = "none";
       personalPanelElement.style.display = "block";
 
       //Initialize new FeatureLayer constant
-      const LAYER = new FeatureLayer({
+      LAYER = new FeatureLayer({
         // SITREP LAYER url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_dfbfd13d17b54fe4bc253c22e8af0620/FeatureServer"
         portalItem: {
           id: "383ab9e4787c4f8db81bd54988142db0"
