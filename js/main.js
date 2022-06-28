@@ -63,6 +63,7 @@ require([
         autoOpenEnabled: false
       }
     });
+    console.log(typeof(VIEW));
 
     function initializeApp() {
       //Change display to main app display
