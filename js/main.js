@@ -12,6 +12,7 @@ require([
     //Constants for the HTML div panels
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
+    const sidePanelElement = document.getElementById("sidePanel");
 
     //OAuth constant linking to registered AGOL application and logging to Cobec portal
     const info = new OAuthInfo({
@@ -65,6 +66,7 @@ require([
       //Change display to main app display
       anonPanelElement.style.display = "none";
       personalPanelElement.style.display = "block";
+      sidePanelElement.style.display = "block";
       addWidgets();
     }
 
