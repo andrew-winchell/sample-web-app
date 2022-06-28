@@ -42,7 +42,7 @@ html, body {
     width: 100%;
     height: 100%;
     flex-grow: 1;
-    display: flex;
+    display: row;
     flex-flow: row;
     overflow: hidden;
     position: relative;
@@ -82,6 +82,6 @@ html, body {
 #footerDiv {
     width: 100%;
     height: 20%;
-    min-height: 200px;
     margin: 10px;
+    float: left;
 }
