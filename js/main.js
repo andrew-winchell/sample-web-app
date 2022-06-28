@@ -91,10 +91,10 @@ require([
 
       });
 
-      addWidgets(MAP);
+      addWidgets(VIEW);
     }
 
-    function addWidgets(map) {
+    function addWidgets(VIEW) {
         //Initialize Basemap Gallery widget
         const BASEMAPGALLERY = new BasemapGallery({
             view: VIEW
