@@ -107,12 +107,13 @@ require([
         spatialReference: VIEW.spatialReference
       });
 
+      let viewDiv = document.getElementById("viewDiv");
       VIEW.whenLayerView(LAYER).then((layerView) => {
         let highlight;
         // listen for the pointer-move event on the View
-        document.getElementById("viewDiv").addEventListener("mousemove", (event) => {
+        viewDiv.addEventListener("mousemove", (event) => {
           // Perform a hitTest on the View
-          VIEW.hitTest(event).then((event) => {
+          viewDiv.hitTest(event).then((event) => {
             // Make sure graphic has a popupTemplate
             const results = event.results.filter((result) => {
               return result.graphic.layer.popupTemplate;
