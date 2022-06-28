@@ -14,6 +14,9 @@ require([
     //Constants for the HTML div panels
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
+    var LAYER;
+    var MAP;
+    var VIEW;
 
     //OAuth constant linking to registered AGOL application and logging to Cobec portal
     const INFO = new OAuthInfo({
@@ -37,7 +40,6 @@ require([
         personalPanelElement.style.display = "none";
     });*/
 
-    var LAYER;
     function initializeApp() {
       //Change display to main app display
       anonPanelElement.style.display = "none";
@@ -54,13 +56,13 @@ require([
       });
 
       //Initialize new Map constant
-      const MAP = new Map({
+      MAP = new Map({
         basemap: "arcgis-dark-gray",
         layers: [LAYER]
       });
 
       //Initialize new MapView constant
-      var VIEW = new MapView ({
+      VIEW = new MapView ({
         container: "viewDiv",
         map: MAP,
         center: [-98.5795, 39.8283],
@@ -69,10 +71,10 @@ require([
           autoOpenEnabled: false
         }
       });
-      addWidgets(VIEW);
+      addWidgets();
     }
 
-    function addWidgets(VIEW) {
+    function addWidgets() {
         //Initialize Basemap Gallery widget
         const BASEMAPGALLERY = new BasemapGallery({
             view: VIEW
