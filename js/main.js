@@ -108,7 +108,7 @@ require([
       VIEW.whenLayerView(LAYER).then((layerView) => {
         let highlight;
         // listen for the pointer-move event on the View
-        VIEW.on("pointer-move", (event) => {
+        VIEW.onmousemove((event) => {
           // Perform a hitTest on the View
           VIEW.hitTest(event).then((event) => {
             // Make sure graphic has a popupTemplate
