@@ -43,7 +43,7 @@ require([
       portalItem: {
         id: "383ab9e4787c4f8db81bd54988142db0"
       },
-      layerId: 0,
+      layerId: 1,
       outFields: ["*"]
     });
 
@@ -63,7 +63,7 @@ require([
         autoOpenEnabled: false
       }
     });
-    
+
     console.log(typeof(VIEW));
 
     function initializeApp() {
