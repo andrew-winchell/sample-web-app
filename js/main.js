@@ -52,7 +52,7 @@ require([
         }
       );
       
-      console.log(LAYOUT.outFields);
+      console.log(LAYER.outFields);
 
       //Initialize new Map constant
       const MAP = new Map({
