@@ -113,7 +113,7 @@ require([
         // listen for the pointer-move event on the View
         viewDiv.addEventListener("mousemove", (event) => {
           // Perform a hitTest on the View
-          viewDiv.hitTest(event).then((event) => {
+          VIEW.hitTest(event).then((event) => {
             // Make sure graphic has a popupTemplate
             const results = event.results.filter((result) => {
               return result.graphic.layer.popupTemplate;
