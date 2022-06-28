@@ -45,8 +45,11 @@ require([
 
       //Initialize new FeatureLayer constant
       const LAYER = new FeatureLayer({
+        portalItem: {
+          id: "383ab9e4787c4f8db81bd54988142db0"
+        },
         // SITREP LAYER url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_dfbfd13d17b54fe4bc253c22e8af0620/FeatureServer"
-        url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_f02b435f02d74f4c94d3dc28796b84f8/FeatureServer",
+        //url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_f02b435f02d74f4c94d3dc28796b84f8/FeatureServer",
         outFields: ["*"]
       });
 
@@ -64,53 +67,21 @@ require([
         zoom: 3
       });
 
-      const GRAPHIC = {
+      const graphic = {
         popupTemplate: {
-          content: "Mouse over features to show details..."
+          content: "Origination Content"
         }
       };
 
-      const FEATURE = new Feature({
-        graphic: GRAPHIC,
+      const feature = new Feature({
+        graphic: graphic,
         map: VIEW.map,
         spatialReference: VIEW.spatialReference
       });
 
-      VIEW.ui.add(FEATURE, "bottom-left");
+      VIEW.ui.add(feature, "bottom-left");
 
-      VIEW.whenLayerView(LAYER).then((layerView) => {
-        let highlight;
-        let objectId;
-
-        const DEBOUNCED_UPDATE = promiseUtils.debounce((event) => {
-          VIEW.hitTest(event).then((event) => {
-            const RESULTS = event.results.filter((result) => {
-              return result.graphic.layer.popupTemplate;
-            });
-
-            const RESULT = RESULTS[0];
-            const NEWOBJECTID = RESULT && RESULT.graphic.attributes[LAYER.objectIdField];
-
-            if (!NEWOBJECTID) {
-              highlight && highlight.remove();
-              objectId = FEATURE.graphic = null;
-            } else if (objectId !== NEWOBJECTID) {
-              highlight && highlight.remove();
-              objectId = NEWOBJECTID;
-              FEATURE.graphic = RESULT.graphic;
-              highlight = layerView.highlight(RESULT.graphic);
-            }
-          });
-        });
-        VIEW.on("pointer-move", (event) => {
-          DEBOUNCED_UPDATE(event).catch((err) => {
-            if (!promiseUtils.isAbortError(err)) {
-              throw err;
-            }
-          });
-        });
-      });
-
+      addWidgets(MAP);
     }
 
     function addWidgets(map) {
