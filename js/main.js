@@ -112,6 +112,7 @@ require([
         viewDiv.addEventListener("mousemove", (event) => {
           // Perform a hitTest on the View
           VIEW.hitTest(event).then((event) => {
+            console.log("HIT");
             // Make sure graphic has a popupTemplate
             const results = event.results.filter((result) => {
               return result.graphic.layer.popupTemplate;
