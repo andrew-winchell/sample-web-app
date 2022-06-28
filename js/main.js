@@ -52,7 +52,10 @@ require([
         }
       );
       
-      console.log(LAYER.outFields);
+      LAYER.when(() => {
+        console.log(LAYER.outFields);
+        console.log(LAYER.fields);
+      });
 
       //Initialize new Map constant
       const MAP = new Map({
