@@ -33,14 +33,45 @@ require([
     esriId.getCredential(INFO.portalUrl + "/sharing");
     
     esriId.checkSignInStatus(INFO.portalUrl + "/sharing").then(() => {
-        initializeApp();
+        //initializeApp();
+        //Change display to main app display
+        anonPanelElement.style.display = "none";
+        personalPanelElement.style.display = "block";
+
+        //Initialize new FeatureLayer constant
+        LAYER = new FeatureLayer({
+          // SITREP LAYER url: "https://services3.arcgis.com/rKjecbIat1XHvd9J/arcgis/rest/services/service_dfbfd13d17b54fe4bc253c22e8af0620/FeatureServer"
+          portalItem: {
+            id: "383ab9e4787c4f8db81bd54988142db0"
+          },
+          layerId: 0,
+          outFields: ["*"]
+        });
+
+        //Initialize new Map constant
+        MAP = new Map({
+          basemap: "arcgis-dark-gray",
+          layers: [LAYER]
+        });
+
+        //Initialize new MapView constant
+        VIEW = new MapView ({
+          container: "viewDiv",
+          map: MAP,
+          center: [-98.5795, 39.8283],
+          zoom: 3,
+          popup: {
+            autoOpenEnabled: false
+          }
+        });
+        addWidgets();
     });/*.catch(() => {
         //If not signed in, display "sign-in" panel
         anonPanelElement.style.display = "none";
         personalPanelElement.style.display = "none";
     });*/
 
-    function initializeApp() {
+    /*function initializeApp() {
       //Change display to main app display
       anonPanelElement.style.display = "none";
       personalPanelElement.style.display = "block";
@@ -72,7 +103,7 @@ require([
         }
       });
       addWidgets();
-    }
+    }*/
 
     function addWidgets() {
         //Initialize Basemap Gallery widget
@@ -92,7 +123,7 @@ require([
         });
     }
 
-    initializeApp.when().then(() => {
+    VIEW.when().then(() => {
       // Create a default graphic for when the application starts
       const graphic = {
         popupTemplate: {
