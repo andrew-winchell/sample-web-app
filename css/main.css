@@ -3,7 +3,6 @@ html, body {
     height: 100%;
     padding: 0;
     margin: 0;
-    
 }
 
 .action {
@@ -47,7 +46,7 @@ html, body {
 }
 
 #viewDiv {
-    width: 80%;
+    width: auto;
     height: auto;
     margin: 10px;
     float: left;
@@ -55,7 +54,7 @@ html, body {
 
 #featureDetailsDiv {
     width: 300px;
-    min-height: 100vh;
+    height: 100%;
     margin: 10px;
     float: left;
 }
