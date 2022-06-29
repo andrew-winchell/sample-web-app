@@ -148,5 +148,5 @@ require([
 
 function openSide() {
   document.getElementById("sidePanel").style.width = "250px";
-  document.getElementById("bodyDiv").style.marginLeft = "250px";
+  document.getElementById("viewDiv").style.marginLeft = "250px";
 }

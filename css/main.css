@@ -26,6 +26,7 @@ html, body {
     margin: 0;
     display: flex;
     flex-flow: column;
+    overflow: hidden;
 }
 
 #headerDiv {
@@ -46,6 +47,7 @@ html, body {
     flex-flow: row;
     overflow: hidden;
     position: relative;
+    transition: margin-left .5s;
 }
 
 #sidePanel {
@@ -62,7 +64,7 @@ html, body {
 }
 
 #viewDiv {
-    width: 100%;
+    width: auto;
     height: auto;
     margin: 10px;
     float: left;
