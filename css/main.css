@@ -91,4 +91,5 @@ html, body {
     position: relative;
     height: 50px;
     width: 20px;
+    top: calc(50% - 25px);
 }
