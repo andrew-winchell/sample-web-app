@@ -149,4 +149,13 @@ require([
 function openSide() {
   document.getElementById("sidePanel").style.width = "250px";
   document.getElementById("viewDiv").style.marginLeft = "250px";
+  document.getElementById("openBtn").style.display = "none";
+  document.getElementById("closeBtn").style.display = "block";
+}
+
+function closeSide() {
+  document.getElementById("sidePanel").style.width = "0px";
+  document.getElementById("viewDiv").style.marginLeft = "10px";
+  document.getElementById("closeBtn").style.display = "none";
+  document.getElementById("openBtn").style.display = "block";
 }
