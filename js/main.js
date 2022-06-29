@@ -145,7 +145,7 @@ require([
         });
       })
       .catch(function(error) {
-        //console.log("Layer View error");
+        console.log("Layer View error");
       });
     });
 });
