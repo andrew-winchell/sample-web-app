@@ -17,6 +17,7 @@ html, body {
     width: auto;
     display: none;
     padding: 5px 5px 5px 0px;
+    background-color: gainsboro;
 }
 
 #mainDiv {
