@@ -40,7 +40,8 @@ require([
     const traconLayer = new FeatureLayer({
       portalItem: {
         id: "383ab9e4787c4f8db81bd54988142db0"
-      }
+      },
+      popupEnabled: true
     });
 
     //Initialize new Map constant
