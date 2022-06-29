@@ -37,6 +37,7 @@ html, body {
     margin: 10px 0px 0px 10px;
     background: url("../img/banner.jpg");
     background-size: 100% 100%;
+    transition: margin-left .5s;
 }
 
 #bodyDiv {
@@ -86,6 +87,7 @@ html, body {
     max-height: 20%;
     margin: 10px;
     float: left;
+    transition: margin-left .5s;
 }
 
 #openBtn, #closeBtn {
