@@ -44,6 +44,23 @@ require([
       popupEnabled: true
     });
 
+    const template = {
+      title: "TRACON: {tracon_id}",
+      content: [
+        {
+          type: "fields",
+          fieldInfos: [
+            {
+              fieldName: "stars_system",
+              label: "STARS System"
+            }
+          ]
+        }
+      ]
+    };
+
+    traconLayer.popupTemplate = template;
+
     //Initialize new Map constant
     const map = new Map({
       basemap: "gray-vector",
