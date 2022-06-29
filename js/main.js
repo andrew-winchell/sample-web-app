@@ -131,6 +131,9 @@ require([
               highlight = layerView.highlight(result.graphic);
             }
           });
+        })
+        .catch(function(error) {
+          //console.log("Layer View error");
         });
 
         // Listen for the pointer-move event on the View
