@@ -86,3 +86,9 @@ html, body {
     margin: 10px;
     float: left;
 }
+
+#openBtn, #closeBtn {
+    position: fixed;
+    top: 45%;
+    bottom: 55%;
+}
