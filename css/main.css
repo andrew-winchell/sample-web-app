@@ -76,7 +76,7 @@ html, body {
 #featureDetailsDiv {
     width: 600px;
     height: auto;
-    overflow-y: scroll;
+    overflow: hidden;
     margin: 10px;
     right: 0;
     top: 0;
