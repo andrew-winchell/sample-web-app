@@ -36,7 +36,7 @@ html, body {
     height: auto;
     font-size: 18pt;
     padding: 20px;
-    margin: 10px 0px 0px 10px;
+    margin: 10px 10px 0px 10px;
     background: url("../img/banner.jpg");
     background-size: 100% 100%;
     transition: margin-left .5s;
