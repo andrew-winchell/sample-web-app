@@ -88,7 +88,7 @@ html, body {
 }
 
 #openBtn, #closeBtn {
-    position: fixed;
+    position: relative;
     height: 50px;
     width: 20px;
 }
