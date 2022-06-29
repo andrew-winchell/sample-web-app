@@ -30,7 +30,7 @@ html, body {
 }
 
 #headerDiv {
-    width: 80%;
+    width: auto;
     height: auto;
     font-size: 18pt;
     padding: 20px;
