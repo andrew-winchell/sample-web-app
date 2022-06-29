@@ -150,6 +150,7 @@ function openSide() {
   document.getElementById("sidePanel").style.width = "250px";
   document.getElementById("bodyDiv").style.marginLeft = "250px";
   document.getElementById("headerDiv").style.marginLeft = "250px";
+  document.getElementById("footerDiv").style.marginLeft = "250px";
   document.getElementById("openBtn").style.display = "none";
   document.getElementById("closeBtn").style.display = "block";
 }
@@ -158,6 +159,7 @@ function closeSide() {
   document.getElementById("sidePanel").style.width = "0px";
   document.getElementById("bodyDiv").style.marginLeft = "0px";
   document.getElementById("headerDiv").style.marginLeft = "10px";
+  document.getElementById("footerDiv").style.marginLeft = "10px";
   document.getElementById("closeBtn").style.display = "none";
   document.getElementById("openBtn").style.display = "block";
 }
