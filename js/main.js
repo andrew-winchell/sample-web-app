@@ -2,13 +2,13 @@ require([
     "esri/core/promiseUtils",
     "esri/identity/OAuthInfo",
     "esri/identity/IdentityManager",
-    "esri/WebMap",
+    "esri/Map",
     "esri/views/MapView",
     "esri/layers/FeatureLayer",
     "esri/widgets/Feature",
     "esri/widgets/BasemapGallery",
     "esri/widgets/Expand"
-], function (promiseUtils, OAuthInfo, esriId, WebMap, MapView, FeatureLayer, Feature, BasemapGallery, Expand) {
+], function (promiseUtils, OAuthInfo, esriId, Map, MapView, FeatureLayer, Feature, BasemapGallery, Expand) {
     //Constants for the HTML div panels
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
@@ -44,10 +44,11 @@ require([
     });
 
     //Initialize new Map constant
-    const map = new WebMap({
-      portalItem: {
-        id: "530b9377d7444fa99bb26ca01a990519"
-      },
+    const map = new Map({
+      basemap: "gray-vector",
+      //portalItem: {
+      //  id: "530b9377d7444fa99bb26ca01a990519"
+      //},
       layers: [traconLayer]
     });
 
