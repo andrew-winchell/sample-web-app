@@ -169,6 +169,11 @@ require([
 
     view.when(() => {
       console.log("TEST");
+      let graphics;
+      let start = 0;
+      let highlight;
+
+      const featureCount = traconLayer.queryFeatureCount();
     });
 
 });
