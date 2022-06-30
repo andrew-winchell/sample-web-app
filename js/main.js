@@ -114,6 +114,42 @@ require([
     }
 
     view.when(() => {
+      console.log("TEST");
+      let graphics;
+      let start = 0;
+
+      const traconCount = traconLayer.queryFeatureCount();
+      console.log(traconCount);
+
+      const traconLayerView = view.whenLayerView(traconLayer);
+
+      const query = {
+        start: start,
+        num: 20,
+        outFields: ["*"],
+        returnGeometry: true,
+        orderByFields: ["stars_system"]
+      };
+
+      const promise = traconLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
+
+      function convertFeatureSetToRows(featureSet, query) {
+        eventsListElement.innerHTML = "";
+        eventsListElement.style.paddingTop = headerPanelElement.style.height.toString();
+
+        graphics = featureSet.features;
+        graphics.forEach((result, index) => {
+          const attributes = result.attributes;
+          const name = attributes.tracon_id;
+
+          const item = document.createElement("calcite-pick-list-item");
+          item.setAttribute("label", name);
+          item.setAttribute("value", index);
+          item.setAttribute("description", "test");
+          eventsListElement.appendChild(item);
+        });
+      };
+
       // Create a default graphic for when the application starts
       const graphic = {
         popupTemplate: {
@@ -167,47 +203,6 @@ require([
         });
       });
     });
-
-    view.when(() => {
-      console.log("TEST");
-      let graphics;
-      let start = 0;
-      let highlight;
-
-      const traconCount = traconLayer.queryFeatureCount();
-      console.log(traconCount);
-
-      const traconLayerView = view.whenLayerView(traconLayer);
-
-      const query = {
-        start: start,
-        num: 20,
-        outFields: ["*"],
-        returnGeometry: true,
-        orderByFields: ["stars_system"]
-      };
-
-      const promise = traconLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
-
-      function convertFeatureSetToRows(featureSet, query) {
-        eventsListElement.innerHTML = "";
-        eventsListElement.style.paddingTop = headerPanelElement.style.height.toString();
-
-        graphics = featureSet.features;
-        graphics.forEach((result, index) => {
-          const attributes = result.attributes;
-          const name = attributes.tracon_id;
-
-          const item = document.createElement("calcite-pick-list-item");
-          item.setAttribute("label", name);
-          item.setAttribute("value", index);
-          item.setAttribute("description", "test");
-          eventsListElement.appendChild(item);
-        });
-      };
-
-    });
-
 });
 
 //function to adjust css properties on side panel open button press
