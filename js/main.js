@@ -103,7 +103,7 @@ require([
         const expand = new Expand({
             view: view,
             //list of subwidgets to place inside the expand widget
-            content: [basemapGallery]
+            content: basemapGallery
         });
 
         //Add Basemap Gallery widget to map view
