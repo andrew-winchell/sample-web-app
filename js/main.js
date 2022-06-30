@@ -32,7 +32,8 @@ require([
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
     const sidePanelElement = document.getElementById("sidePanel");
-    const eventsListElement = document.getElementById("eventList")
+    const headerPanelElement = document.getElementById("headerDiv");
+    const eventsListElement = document.getElementById("eventList");
 
     //Initialize new FeatureLayer constant
     const traconLayer = new FeatureLayer({
@@ -190,6 +191,7 @@ require([
 
       function convertFeatureSetToRows(featureSet, query) {
         eventsListElement.innerHTML = "";
+        eventsListElement.style.paddingTop = headerPanelElement.style.height;
 
         graphics = featureSet.features;
         graphics.forEach((result, index) => {
@@ -201,12 +203,8 @@ require([
           item.setAttribute("value", index);
           item.setAttribute("description", "test");
           eventsListElement.appendChild(item);
-        })
-      }
-
-
-
-
+        });
+      };
 
     });
 
