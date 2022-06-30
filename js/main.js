@@ -173,8 +173,17 @@ require([
       let start = 0;
       let highlight;
 
-      const featureCount = traconLayer.queryFeatureCount();
-      console.log(featureCount);
+      const traconCount = traconLayer.queryFeatureCount();
+      console.log(traconCount);
+
+      const traconLayerView = view.whenLayerView(traconLayer);
+
+
+
+
+
+
+
     });
 
 });
