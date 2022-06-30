@@ -138,7 +138,7 @@ require([
               const fragment = document.createDocumentFragment();
               graphics.forEach((result, index) => {
                 const attributes2 = result.attributes;
-                const name = attributes2.stars_system;
+                const name = attributes2.NAME;
                 const li = document.createElement("li");
                 li.classList.add("panel-result");
                 li.tabIndex = 0;
