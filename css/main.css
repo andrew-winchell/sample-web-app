@@ -32,8 +32,6 @@ html, body {
 }
 
 #headerDiv {
-    width: auto;
-    height: auto;
     font-size: 18pt;
     padding: 20px;
     margin: 10px 10px 0px 10px;

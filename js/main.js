@@ -214,6 +214,7 @@ require([
 function openSide() {
   document.getElementById("sidePanel").style.width = "250px";
   document.getElementById("sidePanel").style.height = document.getElementById("headerDiv").offsetHeight;
+  console.log(document.getElementById("headerDiv").offsetHeight);
   document.getElementById("bodyDiv").style.marginLeft = "250px";
   //document.getElementById("headerDiv").style.marginLeft = "250px";
   document.getElementById("footerDiv").style.marginLeft = "250px";
