@@ -127,32 +127,6 @@ require([
       let graphics;
       view.whenLayerView(traconLayer).then((layerView) => {
         //START LIST WATCH
-        layerView.watch("updating", (value) => {
-          if (!value) {
-            layerView.queryFeatures({
-              geometry: view.extent,
-              returnGeometry: true,
-              orderByFields: ["tracon_id"]
-            }).then((results) => {
-              graphics = results.features;
-              const fragment = document.createDocumentFragment();
-              graphics.forEach((result, index) => {
-                const attributes2 = result.attributes;
-                const name = attributes2.NAME;
-                const li = document.createElement("li");
-                li.classList.add("panel-result");
-                li.tabIndex = 0;
-                li.setAttribute("data-result-id", index);
-                li.textContent = name;
-              });
-              sidePanelElement.innerHTML = "";
-              sidePanelElement.appendChild(fragment);
-            })
-            .catch((error) => {
-              console.error("query fialed: ", error);
-            });
-          }
-        })
         //END LIST WATCH
 
         let highlight;
