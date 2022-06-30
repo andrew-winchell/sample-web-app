@@ -61,7 +61,16 @@ html, body {
     background-color: blanchedalmond;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
+}
+
+#listHeader {
+    height: 10%;
+    width: auto;
+}
+
+#listContainer {
+    height: 90%;
+    width: auto;
 }
 
 #viewDiv {
