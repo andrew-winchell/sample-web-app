@@ -202,6 +202,7 @@ require([
           item.setAttribute("label", name);
           item.setAttribute("value", index);
           item.setAttribute("description", "test");
+          item.setAttribute("disableDeselect", true);
           eventsListElement.appendChild(item);
         });
       };
