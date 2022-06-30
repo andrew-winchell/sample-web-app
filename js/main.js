@@ -9,11 +9,6 @@ require([
     "esri/widgets/BasemapGallery",
     "esri/widgets/Expand"
 ], function (promiseUtils, OAuthInfo, esriId, Map, MapView, FeatureLayer, Feature, BasemapGallery, Expand) {
-    //Constants for the HTML elements
-    const personalPanelElement = document.getElementById("personalizedPanel");
-    const anonPanelElement = document.getElementById("anonymousPanel");
-    const sidePanelElement = document.getElementById("sidePanel");
-    const listNode = document.getElementById("incomeList")
 
     //OAuth constant linking to registered AGOL application and logging to Cobec portal
     const info = new OAuthInfo({
@@ -31,19 +26,25 @@ require([
     
     esriId.checkSignInStatus(info.portalUrl + "/sharing").then(() => {
         initializeApp();
-    });/*.catch(() => {
-        //If not signed in, display "sign-in" panel
-        anonPanelElement.style.display = "none";
-        personalPanelElement.style.display = "none";
-    });*/
+    });
+
+    //Constants for the HTML elements
+    const personalPanelElement = document.getElementById("personalizedPanel");
+    const anonPanelElement = document.getElementById("anonymousPanel");
+    const sidePanelElement = document.getElementById("sidePanel");
+    const eventsListElement = document.getElementById("eventList")
 
     //Initialize new FeatureLayer constant
     const traconLayer = new FeatureLayer({
+      //AGOL portal item ID
       portalItem: {
         id: "383ab9e4787c4f8db81bd54988142db0"
       },
+      //if no layerId provided, defaults to first layer in service
+      //layerId: 0
       popupEnabled: true,
       outFields: ["*"],
+      //configure popup design
       popupTemplate: {
         title: "TRACON: {tracon_id}",
         content: [
@@ -63,20 +64,19 @@ require([
     //Initialize new Map constant
     const map = new Map({
       basemap: "gray-vector",
-      //portalItem: {
-      //  id: "530b9377d7444fa99bb26ca01a990519"
-      //},
+      //add layers to map as a list
       layers: [traconLayer]
     });
 
     //Initialize new MapView constant
     const view = new MapView ({
+      //html container
       container: "viewDiv",
       map: map,
       center: [-98.5795, 39.8283],
       zoom: 3,
       popup: {
-        autoOpenEnabled: false
+        autoOpenEnabled: true
       }
     });
 
