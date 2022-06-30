@@ -142,7 +142,7 @@ require([
               });
               sidePanelElement.innerHTML = "";
               sidePanelElement.appendChild(fragment);
-            });
+            })
             .catch((error) => {
               console.error("query fialed: ", error);
             });
