@@ -80,11 +80,15 @@ require([
       }
     });
 
+    //funciton to switch displays from the empty anonymous panel to the main app panel with content
+    //called after successful OAuth
     function initializeApp() {
-      //Change display to main app display
+      //change html element display styles
       anonPanelElement.style.display = "none";
       personalPanelElement.style.display = "block";
       sidePanelElement.style.display = "block";
+
+      //call the addWidgets function
       addWidgets();
     }
 
