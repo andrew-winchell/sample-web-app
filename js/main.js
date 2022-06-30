@@ -138,7 +138,12 @@ require([
               const fragment = document.createDocumentFragment();
               graphics.forEach((result, index) => {
                 const attributes2 = result.attributes;
-                const name = attributes2.NAME;
+                const name = attributes2.stars_system;
+                const li = document.createElement("li");
+                li.classList.add("panel-result");
+                li.tabIndex = 0;
+                li.setAttribute("data-result-id", index);
+                li.textContent = name;
               });
               sidePanelElement.innerHTML = "";
               sidePanelElement.appendChild(fragment);
@@ -149,6 +154,7 @@ require([
           }
         })
         //END LIST WATCH
+
         let highlight;
         let objectId;
 
