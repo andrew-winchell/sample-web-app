@@ -119,8 +119,11 @@ require([
 
       //build a query to pull features from feature layer
       const query = {
+        //if no num or start properties are set, returns the maxRecordCount on feature service
         //start at the first feature
-        start: 0,
+        //start: 0,
+        //return first 20 records in query
+        //num: 20,
         //return all fields from feature
         outFields: ["*"],
         returnGeometry: true,
