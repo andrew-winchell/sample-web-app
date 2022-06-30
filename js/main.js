@@ -126,6 +126,52 @@ require([
         let highlight;
         let objectId;
 
+        //START LIST
+        let graphics;
+        let start = 0;
+
+        const featureCount = await FeatureLayer.queryFeatureCount();
+        document.getElementById("tablePager").setAttribute("total", featureCount);
+
+        queryPage(0);
+
+        function queryPage(page) {
+          const query = {
+            start: page,
+            num: 20,
+            outFields: ["*"],
+            returnGeometry: true,
+            orderByFields: ["tracon_id"]
+          };
+          const promise = traconLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
+        }
+
+        function convertFeatureSetToRows(featureSet, query) {
+          document.getElementById("incomeList").innerHTML = "";
+
+          graphics = featureSet.features;
+          graphics.forEach((result, index) => {
+            const attributes = result.attributes;
+            const name = attributes.tracon_id;
+            const income = 'median income: ${attributes.stars_system}'
+
+            const item = document.createElement("calcite-pick-list-item");
+            item.setAttribute("label", name);
+            item.setAttribute("value", index);
+            item.setAttribute("description", income);
+            //item.addEventListener("click", onEventClickHandler);
+            document.getElementById("incomeList").appendChild(item);
+          });
+
+          if (highlight) {
+            highlight.remove();
+          }
+          highlight = layerView.highlight(featureSet.features);
+        }
+
+
+        //END LIST
+
         const debouncedUpdate = promiseUtils.debounce((event) => {
           // Perform a hitTest on the View
           view.hitTest(event).then((event) => {

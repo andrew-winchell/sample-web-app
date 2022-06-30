@@ -21,7 +21,34 @@
         <div id="personalizedPanel">
             <div id="mainDiv">
                 <div id="headerDiv">Cobec Consulting Web Application</div>
-                <div id="sidePanel">Hello There</div>
+                <div id="sidePanel"><calcite-action
+                    id="toggle-button"
+                    text="Toggle results panel"
+                    title="Collapse results panel"
+                    icon="chevrons-left"
+                    scale="s"
+                  >
+                  </calcite-action>
+                  <calcite-panel class="panel-side" id="result-panel">
+                    <div slot="header-content" scale="s">
+                      <h3 class="heading">
+                        Medium household income by counties from highest to lowest
+                      </h3>
+                      <p>returns 20 counties at a time</p>
+                      <p></p>
+                    </div>
+              
+                    <calcite-panel id="resultsDiv">
+                      <calcite-pick-list id="incomeList"></calcite-pick-list>
+                    </calcite-panel>
+                    <div slot="footer">
+                      <calcite-pagination
+                        id="tablePager"
+                        start="1"
+                        num="20"
+                      ></calcite-pagination>
+                    </div>
+                  </calcite-panel></div>
                 <div id="bodyDiv">
                     <button id="openBtn" onclick="openSide()">></button>
                     <button id="closeBtn" style="display:none;" onclick="closeSide()"><</button>
