@@ -210,6 +210,7 @@ require([
 
 });
 
+//function to adjust css properties on side panel open button press
 function openSide() {
   document.getElementById("sidePanel").style.width = "250px";
   document.getElementById("sidePanel").style.height = 100% - document.getElementById("headerDiv").offsetHeight;
@@ -220,6 +221,7 @@ function openSide() {
   document.getElementById("closeBtn").style.display = "block";
 }
 
+//function to adjust css properties on side panel close button press
 function closeSide() {
   document.getElementById("sidePanel").style.width = "0px";
   document.getElementById("bodyDiv").style.marginLeft = "0px";
