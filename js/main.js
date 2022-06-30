@@ -178,7 +178,31 @@ require([
 
       const traconLayerView = view.whenLayerView(traconLayer);
 
+      const query = {
+        start: start,
+        num: 20,
+        outFields: ["*"],
+        returnGeometry: true,
+        orderByFields: ["stars_system"]
+      };
 
+      const promise = traconLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
+
+      function convertFeatureSetToRows(featureSet, query) {
+        eventsListElement.innerHTML = "";
+
+        graphics = featureSet.features;
+        graphics.forEach((result, index) => {
+          const attributes = result.attributes;
+          const name = attributes.tracon_id;
+
+          const item = document.createElement("calcite-pick-list-item");
+          item.setAttribute("label", name);
+          item.setAttribute("value", index);
+          item.setAttribute("description", "test");
+          eventsListElement.appendChild(item);
+        })
+      }
 
 
 
