@@ -60,13 +60,6 @@ require([
       }
     });
 
-    //START LIST SECTION
-
-
-
-
-    //END LIST SECTION
-
     //Initialize new Map constant
     const map = new Map({
       basemap: "gray-vector",
