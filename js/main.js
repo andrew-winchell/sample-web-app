@@ -9,11 +9,12 @@ require([
     "esri/widgets/BasemapGallery",
     "esri/widgets/Expand"
 ], function (promiseUtils, OAuthInfo, esriId, Map, MapView, FeatureLayer, Feature, BasemapGallery, Expand) {
-    //Constants for the HTML div panels
+    //Constants for the HTML elements
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
     const sidePanelElement = document.getElementById("sidePanel");
-   
+    const listNode = document.getElementById("incomeList")
+
     //OAuth constant linking to registered AGOL application and logging to Cobec portal
     const info = new OAuthInfo({
         appId: "KiHuSotTULGiKtfZ",
@@ -42,25 +43,29 @@ require([
         id: "383ab9e4787c4f8db81bd54988142db0"
       },
       popupEnabled: true,
-      outFields: ["*"]
+      outFields: ["*"],
+      popupTemplate: {
+        title: "TRACON: {tracon_id}",
+        content: [
+          {
+            type: "fields",
+            fieldInfos: [
+              {
+                fieldName: "stars_system",
+                label: "STARS System"
+              }
+            ]
+          }
+        ]
+      }
     });
 
-    const template = {
-      title: "TRACON: {tracon_id}",
-      content: [
-        {
-          type: "fields",
-          fieldInfos: [
-            {
-              fieldName: "stars_system",
-              label: "STARS System"
-            }
-          ]
-        }
-      ]
-    };
+    //START LIST SECTION
 
-    traconLayer.popupTemplate = template;
+
+
+
+    //END LIST SECTION
 
     //Initialize new Map constant
     const map = new Map({
@@ -124,11 +129,7 @@ require([
         spatialReference: view.spatialReference
       });
 
-      let graphics;
       view.whenLayerView(traconLayer).then((layerView) => {
-        //START LIST WATCH
-        //END LIST WATCH
-
         let highlight;
         let objectId;
 
