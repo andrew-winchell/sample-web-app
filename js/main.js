@@ -191,7 +191,7 @@ require([
 
       function convertFeatureSetToRows(featureSet, query) {
         eventsListElement.innerHTML = "";
-        eventsListElement.style.paddingTop = headerPanelElement.style.height;
+        eventsListElement.style.paddingTop = headerPanelElement.style.height.toString();
 
         graphics = featureSet.features;
         graphics.forEach((result, index) => {
