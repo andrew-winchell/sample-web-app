@@ -166,6 +166,11 @@ require([
         });
       });
     });
+
+    view.when(() => {
+      console.log("TEST");
+    });
+
 });
 
 function openSide() {
