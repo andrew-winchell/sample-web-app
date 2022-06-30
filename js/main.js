@@ -156,9 +156,7 @@ require([
           });
         });
 
-        // Listen for the pointer-move event on the View
-        // and make sure that function is not invoked more
-        // than one at a time
+        // Listen for the pointer-move event on the View and make sure that function is not invoked more than one at a time
         view.on("click", (event) => {
           debouncedUpdate(event).catch((err) => {
             if (!promiseUtils.isAbortError(err)) {
