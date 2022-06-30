@@ -13,7 +13,7 @@ require([
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
     const sidePanelElement = document.getElementById("sidePanel");
-
+   
     //OAuth constant linking to registered AGOL application and logging to Cobec portal
     const info = new OAuthInfo({
         appId: "KiHuSotTULGiKtfZ",
@@ -41,7 +41,8 @@ require([
       portalItem: {
         id: "383ab9e4787c4f8db81bd54988142db0"
       },
-      popupEnabled: true
+      popupEnabled: true,
+      outFields: ["*"]
     });
 
     const template = {
@@ -123,7 +124,31 @@ require([
         spatialReference: view.spatialReference
       });
 
+      let graphics;
       view.whenLayerView(traconLayer).then((layerView) => {
+        //START LIST WATCH
+        layerView.watch("updating", (value) => {
+          if (!value) {
+            layerView.queryFeatures({
+              geometry: view.extent,
+              returnGeometry: true,
+              orderByFields: ["tracon_id"]
+            }).then((results) => {
+              graphics = results.features;
+              const fragment = document.createDocumentFragment();
+              graphics.forEach((result, index) => {
+                const attributes2 = result.attributes;
+                const name = attributes2.NAME;
+              });
+              sidePanelElement.innerHTML = "";
+              sidePanelElement.appendChild(fragment);
+            });
+            .catch((error) => {
+              console.error("query fialed: ", error);
+            });
+          }
+        })
+        //END LIST WATCH
         let highlight;
         let objectId;
 
