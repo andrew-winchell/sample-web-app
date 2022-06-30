@@ -80,7 +80,7 @@ require([
       }
     });
 
-    //funciton to switch displays from the empty anonymous panel to the main app panel with content
+    //function to switch displays from the empty anonymous panel to the main app panel with content
     //called after successful OAuth
     function initializeApp() {
       //change html element display styles
@@ -92,6 +92,7 @@ require([
       addWidgets();
     }
 
+    //function to add map widgets to map view
     function addWidgets() {
         //Initialize Basemap Gallery widget
         const basemapGallery = new BasemapGallery({
@@ -101,7 +102,8 @@ require([
         //Initialize Expand widget
         const expand = new Expand({
             view: view,
-            content: basemapGallery
+            //list of subwidgets to place inside the expand widget
+            content: [basemapGallery]
         });
 
         //Add Basemap Gallery widget to map view
