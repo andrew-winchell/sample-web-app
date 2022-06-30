@@ -174,6 +174,7 @@ require([
       let highlight;
 
       const featureCount = traconLayer.queryFeatureCount();
+      console.log(featureCount);
     });
 
 });
