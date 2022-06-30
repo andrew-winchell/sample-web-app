@@ -213,7 +213,7 @@ require([
 //function to adjust css properties on side panel open button press
 function openSide() {
   document.getElementById("sidePanel").style.width = "250px";
-  document.getElementById("sidePanel").style.top = (document.getElementById("headerDiv").offsetHeight + 20).toString() + "px";
+  document.getElementById("sidePanel").style.top = (document.getElementById("headerDiv").offsetHeight + 25).toString() + "px";
   document.getElementById("bodyDiv").style.marginLeft = "250px";
   document.getElementById("footerDiv").style.marginLeft = "250px";
   document.getElementById("openBtn").style.display = "none";

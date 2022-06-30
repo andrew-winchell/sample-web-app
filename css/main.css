@@ -59,8 +59,9 @@ html, body {
     bottom: 0;
     left: 0;
     background-color: blanchedalmond;
-    overflow-x: hidden;
+    overflow: hidden;
     transition: 0.5s;
+    margin-bottom: 10px;
 }
 
 #listHeader {
@@ -71,6 +72,7 @@ html, body {
 #listContainer {
     height: 90%;
     width: auto;
+    overflow: auto;
 }
 
 #viewDiv {
