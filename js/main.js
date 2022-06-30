@@ -113,31 +113,29 @@ require([
         });
     }
 
+    //wait for view to load
     view.when(() => {
-      console.log("TEST");
-      let graphics;
-      let start = 0;
-
-      const traconCount = traconLayer.queryFeatureCount();
-      console.log(traconCount);
-
       const traconLayerView = view.whenLayerView(traconLayer);
 
+      //build a query to pull features from feature layer
       const query = {
-        start: start,
-        num: 20,
+        //start at the first feature
+        start: 0,
+        //return all fields from feature
         outFields: ["*"],
         returnGeometry: true,
+        //order features by {field_name}
         orderByFields: ["stars_system"]
       };
 
       const promise = traconLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
 
+      //function to loop through queried feature set and create pick list items for each feature
       function convertFeatureSetToRows(featureSet, query) {
         eventsListElement.innerHTML = "";
         eventsListElement.style.paddingTop = headerPanelElement.style.height.toString();
 
-        graphics = featureSet.features;
+        let graphics = featureSet.features;
         graphics.forEach((result, index) => {
           const attributes = result.attributes;
           const name = attributes.tracon_id;
