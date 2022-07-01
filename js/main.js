@@ -126,7 +126,8 @@ require([
         num: 1000,
         //return all fields from feature
         outFields: ["*"],
-        returnGeometry: true,
+        //for apps without a map, geometry is unnecessary
+        returnGeometry: false,
         //order features by {field_name}
         orderByFields: ["stars_system"]
       };
@@ -165,6 +166,12 @@ require([
         map: view.map,
         spatialReference: view.spatialReference
       });
+
+      function listClickHandler(event) {
+        const target = event.target;
+        const resultId = target.getAttribute("value");
+        console.log(resultId);
+      }
 
       view.whenLayerView(traconLayer).then((layerView) => {
         let highlight;
