@@ -134,13 +134,14 @@ require([
 
       const promise = traconLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
 
+      let features;
       //function to loop through queried feature set and create pick list items for each feature
       function convertFeatureSetToRows(featureSet, query) {
         eventsListElement.innerHTML = "";
         eventsListElement.style.paddingTop = headerPanelElement.style.height.toString();
 
-        let graphics = featureSet.features;
-        graphics.forEach((result, index) => {
+        features = featureSet.features;
+        features.forEach((result, index) => {
           const attributes = result.attributes;
           const name = attributes.tracon_id;
 
@@ -170,8 +171,22 @@ require([
 
       function listClickHandler(event) {
         const target = event.target;
-        const resultId = target.attributes;
-        console.log(resultId);
+        const resultId = target.getAttribute("value");
+        
+        const result = resultId && features && features[parseInt(resultId, 10)];
+
+        if (result) {
+          view.goTo(result.geometry.extent.expand(6)).then(() => {
+            view.popup.open({
+              features: [result],
+              location: result.geometry.centroid
+            });
+          }).catch((error) => {
+            if (error.name != "AbortError") {
+              console.error(error);
+            }
+          });
+        }
       }
 
       view.whenLayerView(traconLayer).then((layerView) => {
