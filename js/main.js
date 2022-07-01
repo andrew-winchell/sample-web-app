@@ -148,6 +148,7 @@ require([
           item.setAttribute("label", name);
           item.setAttribute("value", index);
           item.setAttribute("description", "test");
+          item.addEventListener("click", listClickHandler);
           eventsListElement.appendChild(item);
         });
       };
