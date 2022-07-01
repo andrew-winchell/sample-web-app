@@ -170,7 +170,7 @@ require([
 
       function listClickHandler(event) {
         const target = event.target;
-        const resultId = target.getAttribute("value");
+        const resultId = target.attributes;
         console.log(resultId);
       }
 
