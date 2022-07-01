@@ -127,7 +127,7 @@ require([
         //return all fields from feature
         outFields: ["*"],
         //for apps without a map, geometry is unnecessary
-        returnGeometry: false,
+        returnGeometry: true,
         //order features by {field_name}
         orderByFields: ["stars_system"]
       };
