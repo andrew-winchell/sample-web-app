@@ -123,7 +123,7 @@ require([
         //start at the first feature
         //start: 0,
         //return first 20 records in query
-        //num: 20,
+        num: 1000,
         //return all fields from feature
         outFields: ["*"],
         returnGeometry: true,
