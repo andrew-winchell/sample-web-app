@@ -109,3 +109,7 @@ html, body {
     border: 1.5px solid rgb(185, 185, 185);
     border-radius: 0% 25% 25% 0%;
 }
+
+#keyTakeawaysDiv {
+    display: none;
+}
