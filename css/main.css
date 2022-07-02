@@ -112,4 +112,5 @@ html, body {
 
 #keyTakeawaysDiv {
     display: none;
+    height: auto;
 }
