@@ -26,6 +26,7 @@ require([
     
     esriId.checkSignInStatus(info.portalUrl + "/sharing").then(() => {
         initializeApp();
+    });
 
     //Constants for the HTML elements
     const personalPanelElement = document.getElementById("personalizedPanel");
@@ -49,5 +50,4 @@ require([
         //call the addWidgets function
         //addWidgets();
     }
-    });
 });
