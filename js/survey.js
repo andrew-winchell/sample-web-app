@@ -37,7 +37,7 @@ require([
         //change html element display styles
         anonPanelElement.style.display = "none";
         personalPanelElement.style.display = "block";
-        sidePanelElement.style.display = "block";
+        //sidePanelElement.style.display = "block";
 
         var newIncidentForm = new Survey123WebForm({
             clientId: "KiHuSotTULGiKtfZ",
