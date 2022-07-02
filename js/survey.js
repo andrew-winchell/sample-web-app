@@ -46,9 +46,17 @@ require([
             itemId: "2d22a805f44c4f5d8eaa3bc0d7712ca1",
             portalUrl: "https://cobecconsulting.maps.arcgis.com"
         });
+        
+
+        var keyTakeawaysForm = new Survey123WebForm({
+            clientId: "KiHuSotTULGiKtfZ",
+            container: "keyTakeawaysDiv",
+            itemId: "98a44f915cc141439ff807eca0c7b671",
+            portalUrl: "https://cobecconsulting.maps.arcgis.com"
+        });
   
         //call the addWidgets function
         //addWidgets();
     }
-    
+
 });
