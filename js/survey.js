@@ -27,6 +27,10 @@ require([
     esriId.checkSignInStatus(info.portalUrl + "/sharing").then(() => {
         initializeApp();
 
+    //Constants for the HTML elements
+    const personalPanelElement = document.getElementById("personalizedPanel");
+    const anonPanelElement = document.getElementById("anonymousPanel");
+
     //function to switch displays from the empty anonymous panel to the main app panel with content
     //called after successful OAuth
     function initializeApp() {
