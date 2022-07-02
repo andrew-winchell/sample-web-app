@@ -50,4 +50,5 @@ require([
         //call the addWidgets function
         //addWidgets();
     }
+    
 });
