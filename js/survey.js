@@ -107,18 +107,18 @@ require([
           item.setAttribute("label", label);
           item.setAttribute("value", index);
           item.setAttribute("description", attributes.incident_start_dtg);
-          item.addEventListener("click", listClickHandler);
+          item.addEventListener("click", () => listClickHandler(attributes));
           eventsListElement.appendChild(item);
         });
       };
 
-      function listClickHandler(event) {
+      function listClickHandler(event, attributes) {
         const target = event.target;
         const resultId = target.getAttribute("value");
         
         const result = resultId && features && features[parseInt(resultId, 10)];
 
-        console.log(result);
+        console.log(attributes);
       }
 });
 
