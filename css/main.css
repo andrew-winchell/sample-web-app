@@ -84,6 +84,10 @@ html, body {
     overflow: hidden;
 }
 
+#surveyView {
+    height: 90%;
+}
+
 #featureDetails {
     min-width: 50%;
     height: 75%;

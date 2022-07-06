@@ -119,7 +119,7 @@ require([
       }
 });
 
-const newIncidentForm = new Survey123WebForm({
+let newIncidentForm = new Survey123WebForm({
     clientId: "KiHuSotTULGiKtfZ",
     container: "surveyView",
     itemId: "98a44f915cc141439ff807eca0c7b671",
