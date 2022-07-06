@@ -106,7 +106,7 @@ require([
           const item = document.createElement("calcite-pick-list-item");
           item.setAttribute("label", name);
           item.setAttribute("value", index);
-          item.setAttribute("description", attributes.incident_start_dtg.toString());
+          item.setAttribute("description", attributes.incident_start_dtg);
           //item.addEventListener("click", listClickHandler);
           eventsListElement.appendChild(item);
         });
