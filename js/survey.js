@@ -115,7 +115,6 @@ require([
       function listClickHandler(attributes) {
         console.log(attributes.globalId);
         console.log(newIncidentForm.globalId);
-        
         newIncidentForm.globalId = attributes.globalId;
       }
 });
