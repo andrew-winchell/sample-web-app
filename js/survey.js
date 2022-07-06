@@ -124,7 +124,7 @@ let newIncidentForm = new Survey123WebForm({
     container: "surveyView",
     itemId: "98a44f915cc141439ff807eca0c7b671",
     portalUrl: "https://cobecconsulting.maps.arcgis.com",
-    globalId: "13605c0d-46c8-4739-8dda-395089f40665",
+    globalId: "",
     mode: "edit"
 });
 
