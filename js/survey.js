@@ -113,7 +113,12 @@ require([
       };
 
       function listClickHandler(event) {
-        console.log(event.target);
+        const target = event.target;
+        const resultId = target.getAttribute("value");
+        
+        const result = resultId && features && features[parseInt(resultId, 10)];
+
+        console.log(result);
       }
 });
 
