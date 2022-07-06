@@ -31,6 +31,7 @@ require([
     //Constants for the HTML elements
     const personalPanelElement = document.getElementById("personalizedPanel");
     const anonPanelElement = document.getElementById("anonymousPanel");
+    const sidePanelElement = document.getElementById("sidePanel");
 
     //function to switch displays from the empty anonymous panel to the main app panel with content
     //called after successful OAuth
@@ -38,7 +39,7 @@ require([
         //change html element display styles
         anonPanelElement.style.display = "none";
         personalPanelElement.style.display = "block";
-        //sidePanelElement.style.display = "block";
+        sidePanelElement.style.display = "block";
 
         var newIncidentForm = new Survey123WebForm({
             clientId: "KiHuSotTULGiKtfZ",
@@ -60,3 +61,22 @@ require([
     }
 
 });
+
+//function to adjust css properties on side panel open button press
+function openSide() {
+    document.getElementById("sidePanel").style.width = "250px";
+    document.getElementById("sidePanel").style.top = (document.getElementById("headerDiv").offsetHeight + 25).toString() + "px";
+    document.getElementById("bodyDiv").style.marginLeft = "250px";
+    document.getElementById("footerDiv").style.marginLeft = "250px";
+    document.getElementById("openBtn").style.display = "none";
+    document.getElementById("closeBtn").style.display = "block";
+  }
+  
+  //function to adjust css properties on side panel close button press
+  function closeSide() {
+    document.getElementById("sidePanel").style.width = "0px";
+    document.getElementById("bodyDiv").style.marginLeft = "0px";
+    document.getElementById("footerDiv").style.marginLeft = "10px";
+    document.getElementById("closeBtn").style.display = "none";
+    document.getElementById("openBtn").style.display = "block";
+  }
