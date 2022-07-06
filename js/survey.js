@@ -113,9 +113,15 @@ require([
       };
 
       function listClickHandler(attributes) {
-        console.log(attributes.globalid);
-        console.log(newIncidentForm.globalId);
-        newIncidentForm.globalId = attributes.globalid;
+        newIncidentForm.destroy();
+        let newIncidentForm = new Survey123WebForm({
+            clientId: "KiHuSotTULGiKtfZ",
+            container: "surveyView",
+            itemId: "98a44f915cc141439ff807eca0c7b671",
+            portalUrl: "https://cobecconsulting.maps.arcgis.com",
+            globalId: attributes.globalid,
+            mode: "edit"
+        });
       }
 });
 
