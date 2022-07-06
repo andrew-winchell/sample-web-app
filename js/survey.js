@@ -107,13 +107,13 @@ require([
           item.setAttribute("label", label);
           item.setAttribute("value", index);
           item.setAttribute("description", attributes.incident_start_dtg);
-          item.addEventListener("click", listClickHandler(attributes));
+          item.addEventListener("click", listClickHandler);
           eventsListElement.appendChild(item);
         });
       };
 
-      function listClickHandler(event, attributes) {
-        console.log(attributes);
+      function listClickHandler(event) {
+        console.log(event.target);
       }
 });
 
