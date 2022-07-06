@@ -66,6 +66,8 @@ function openSide() {
   
   //function to adjust css properties on side panel close button press
   function closeSide() {
+    delete newIncidentForm;
+
     document.getElementById("sidePanel").style.width = "0px";
     document.getElementById("bodyDiv").style.marginLeft = "0px";
     document.getElementById("closeBtn").style.display = "none";
