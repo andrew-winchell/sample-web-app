@@ -48,7 +48,6 @@ require([
             portalUrl: "https://cobecconsulting.maps.arcgis.com"
         });
         
-
         var keyTakeawaysForm = new Survey123WebForm({
             clientId: "KiHuSotTULGiKtfZ",
             container: "keyTakeawaysDiv",
