@@ -41,6 +41,7 @@ require([
         anonPanelElement.style.display = "none";
         personalPanelElement.style.display = "block";
         sidePanelElement.style.display = "block";
+
   
         //call the addWidgets function
         //addWidgets();
@@ -85,7 +86,7 @@ require([
         //for apps without a map, geometry is unnecessary
         returnGeometry: true,
         //order features by {field_name}
-        orderByFields: ["stars_system"]
+        orderByFields: ["objectid"]
       };
 
       const promise = listLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
