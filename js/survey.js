@@ -123,8 +123,10 @@ function openSide() {
     const newIncidentForm = new Survey123WebForm({
         clientId: "KiHuSotTULGiKtfZ",
         container: "surveyView",
-        itemId: "2d22a805f44c4f5d8eaa3bc0d7712ca1",
-        portalUrl: "https://cobecconsulting.maps.arcgis.com"
+        itemId: "98a44f915cc141439ff807eca0c7b671",
+        portalUrl: "https://cobecconsulting.maps.arcgis.com",
+        globalId: "13605c0d-46c8-4739-8dda-395089f40665",
+        mode: "edit"
     });
 
     document.getElementById("sidePanel").style.width = "250px";
