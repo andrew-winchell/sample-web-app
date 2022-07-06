@@ -43,7 +43,6 @@ html, body {
 #bodyDiv {
     width: auto;
     height: 100%;
-    flex-grow: 1;
     display: flex;
     flex-flow: row;
     overflow: hidden;
