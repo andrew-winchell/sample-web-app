@@ -69,7 +69,7 @@ function openSide() {
     document.getElementById("footerDiv").style.marginLeft = "250px";
     document.getElementById("openBtn").style.display = "none";
     document.getElementById("closeBtn").style.display = "block";
-  }
+}
   
   //function to adjust css properties on side panel close button press
   function closeSide() {
@@ -78,4 +78,4 @@ function openSide() {
     document.getElementById("footerDiv").style.marginLeft = "10px";
     document.getElementById("closeBtn").style.display = "none";
     document.getElementById("openBtn").style.display = "block";
-  }
+}
