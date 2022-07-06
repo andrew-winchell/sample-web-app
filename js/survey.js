@@ -40,8 +40,6 @@ require([
         anonPanelElement.style.display = "none";
         personalPanelElement.style.display = "block";
         sidePanelElement.style.display = "block";
-
-        var newIncidentForm = {};
   
         //call the addWidgets function
         //addWidgets();
