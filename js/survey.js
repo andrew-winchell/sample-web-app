@@ -101,10 +101,10 @@ require([
         features = featureSet.features;
         features.forEach((result, index) => {
           const attributes = result.attributes;
-          const name = attributes.incident_name;
+          const label = attributes.incident_name;
 
           const item = document.createElement("calcite-pick-list-item");
-          item.setAttribute("label", name);
+          item.setAttribute("label", label);
           item.setAttribute("value", index);
           item.setAttribute("description", attributes.incident_start_dtg);
           //item.addEventListener("click", listClickHandler);
