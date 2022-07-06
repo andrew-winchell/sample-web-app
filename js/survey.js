@@ -50,7 +50,7 @@ require([
 //function to adjust css properties on side panel open button press
 function openSide() {
 
-    newIncidentForm = new Survey123WebForm({
+    const newIncidentForm = new Survey123WebForm({
         clientId: "KiHuSotTULGiKtfZ",
         container: "surveyView",
         itemId: "2d22a805f44c4f5d8eaa3bc0d7712ca1",
@@ -66,7 +66,10 @@ function openSide() {
   
   //function to adjust css properties on side panel close button press
   function closeSide() {
-    delete newIncidentForm;
+    document.querySelectorAll('iframe').forEach(
+        function(elem){
+            elem.parentNode.removeChild(elem);
+    });
 
     document.getElementById("sidePanel").style.width = "0px";
     document.getElementById("bodyDiv").style.marginLeft = "0px";
