@@ -40,6 +40,8 @@ require([
         anonPanelElement.style.display = "none";
         personalPanelElement.style.display = "block";
         sidePanelElement.style.display = "block";
+
+        var newIncidentForm = {};
   
         //call the addWidgets function
         //addWidgets();
@@ -50,13 +52,13 @@ require([
 //function to adjust css properties on side panel open button press
 function openSide() {
 
-    var newIncidentForm = new Survey123WebForm({
+    newIncidentForm = new Survey123WebForm({
         clientId: "KiHuSotTULGiKtfZ",
         container: "surveyView",
         itemId: "2d22a805f44c4f5d8eaa3bc0d7712ca1",
         portalUrl: "https://cobecconsulting.maps.arcgis.com"
     });
-    
+
     document.getElementById("sidePanel").style.width = "250px";
     document.getElementById("sidePanel").style.top = (document.getElementById("headerDiv").offsetHeight + 25).toString() + "px";
     document.getElementById("bodyDiv").style.marginLeft = "250px";
