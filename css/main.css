@@ -97,7 +97,6 @@ html, body {
     height: auto;
     max-height: 20%;
     margin: 10px;
-    float: left;
     clear: both;
     transition: margin-left .5s;
 }
