@@ -107,10 +107,14 @@ require([
           item.setAttribute("label", label);
           item.setAttribute("value", index);
           item.setAttribute("description", attributes.incident_start_dtg);
-          //item.addEventListener("click", listClickHandler);
+          item.addEventListener("click", listClickHandler(attributes));
           eventsListElement.appendChild(item);
         });
       };
+
+      function listClickHandler(event, attributes) {
+        console.log(attributes);
+      }
 });
 
 //function to adjust css properties on side panel open button press
