@@ -33,6 +33,7 @@ require([
     const anonPanelElement = document.getElementById("anonymousPanel");
     const headerPanelElement = document.getElementById("headerDiv");
     const sidePanelElement = document.getElementById("sidePanel");
+    const eventsListElement = document.getElementById("eventList");
 
     //function to switch displays from the empty anonymous panel to the main app panel with content
     //called after successful OAuth
