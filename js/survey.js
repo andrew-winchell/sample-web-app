@@ -113,7 +113,11 @@ require([
       };
 
       function listClickHandler(attributes) {
-        newIncidentForm.destroy();
+        document.querySelectorAll('iframe').forEach(
+            function(elem){
+                elem.parentNode.removeChild(elem);
+        });
+
         let newIncidentForm = new Survey123WebForm({
             clientId: "KiHuSotTULGiKtfZ",
             container: "surveyView",
@@ -122,6 +126,7 @@ require([
             globalId: attributes.globalid,
             mode: "edit"
         });
+
       }
 });
 
@@ -136,7 +141,6 @@ let newIncidentForm = new Survey123WebForm({
 
 //function to adjust css properties on side panel open button press
 function openSide() {
-
     document.getElementById("sidePanel").style.width = "250px";
     document.getElementById("sidePanel").style.top = (document.getElementById("headerDiv").offsetHeight + 25).toString() + "px";
     document.getElementById("bodyDiv").style.marginLeft = "250px";
@@ -146,11 +150,6 @@ function openSide() {
   
   //function to adjust css properties on side panel close button press
   function closeSide() {
-    document.querySelectorAll('iframe').forEach(
-        function(elem){
-            elem.parentNode.removeChild(elem);
-    });
-
     document.getElementById("sidePanel").style.width = "0px";
     document.getElementById("bodyDiv").style.marginLeft = "0px";
     document.getElementById("closeBtn").style.display = "none";
