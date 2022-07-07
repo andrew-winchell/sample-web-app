@@ -180,7 +180,7 @@ function openKeyTakeaways() {
 function resetSurvey(itemGlobalId) {
     if (survey123Instance) {
         console.log(survey123Instance);
-        let itemId = survey123Instance.itemId;
+        let itemId = survey123Instance.options.itemId;
         console.log(itemId);
 
         document.querySelectorAll('iframe').forEach(
