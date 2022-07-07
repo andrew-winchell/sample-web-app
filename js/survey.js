@@ -183,10 +183,10 @@ function resetSurvey() {
             function(elem){
                 elem.parentNode.removeChild(elem);
         });
-        
+
         survey123Instance.globalId = itemGlobalId;
         
-        let oldSurveyInstance = survey123Instance;
+        let oldSurveyInstance = new survey123Instance;
         console.log(oldSurveyInstance);
     }
 }
