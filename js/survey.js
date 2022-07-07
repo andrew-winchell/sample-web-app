@@ -113,7 +113,9 @@ require([
       };
 
       function listClickHandler(attributes) {
-        document.querySelectorAll('iframe').forEach(
+        itemGlobalId = attributes.globalid;
+
+        /*document.querySelectorAll('iframe').forEach(
             function(elem){
                 elem.parentNode.removeChild(elem);
         });
@@ -125,19 +127,24 @@ require([
             portalUrl: "https://cobecconsulting.maps.arcgis.com",
             globalId: attributes.globalid,
             mode: "edit"
-        });
+        });*/
 
       }
 });
 
-let newIncidentForm = new Survey123WebForm({
-    clientId: "KiHuSotTULGiKtfZ",
-    container: "surveyView",
-    itemId: "98a44f915cc141439ff807eca0c7b671",
-    portalUrl: "https://cobecconsulting.maps.arcgis.com",
-    globalId: "",
-    mode: "edit"
-});
+let itemGlobalId;
+
+function openNewIncident() {
+    console.log(itemGlobalId);
+}
+
+function openIncidentDetails() {
+    return 1;
+}
+
+function openKeyTakeaways() {
+    return 2;
+}
 
 //function to adjust css properties on side panel open button press
 function openSide() {
