@@ -119,67 +119,83 @@ require([
 });
 
 let itemGlobalId;
+let surveyItemId;
 let survey123Instance;
 
 function openNewIncident() {
-    document.querySelectorAll('iframe').forEach(
-        function(elem){
-            elem.parentNode.removeChild(elem);
-    });
+    if (surveyItemId != "9d335e842d3f471f97cdba72bd53a430") {
 
-    survey123Instance = new Survey123WebForm({
-        clientId: "KiHuSotTULGiKtfZ",
-        container: "surveyView",
-        itemId: "9d335e842d3f471f97cdba72bd53a430",
-        portalUrl: "https://cobecconsulting.maps.arcgis.com"
-    });
-}
+        surveyItemId = "9d335e842d3f471f97cdba72bd53a430";
 
-function openIncidentDetails() {
-    document.querySelectorAll('iframe').forEach(
-        function(elem){
-            elem.parentNode.removeChild(elem);
-    });
+        document.querySelectorAll('iframe').forEach(
+            function(elem){
+                elem.parentNode.removeChild(elem);
+        });
 
-    if(typeof itemGlobalId !== "undefined"){
         survey123Instance = new Survey123WebForm({
             clientId: "KiHuSotTULGiKtfZ",
             container: "surveyView",
-            itemId: "3e58460a08b84cd7a90f32b2f21ba728",
-            portalUrl: "https://cobecconsulting.maps.arcgis.com",
-            globalId: itemGlobalId,
-            mode: "edit"
+            itemId: surveyItemId,
+            portalUrl: "https://cobecconsulting.maps.arcgis.com"
         });
     }
-    else{
-        setTimeout(openIncidentDetails, 250);
+}
+
+function openIncidentDetails() {
+    if (surveyItemId != "3e58460a08b84cd7a90f32b2f21ba728") {
+
+        surveyItemId = "3e58460a08b84cd7a90f32b2f21ba728";
+
+        document.querySelectorAll('iframe').forEach(
+            function(elem){
+                elem.parentNode.removeChild(elem);
+        });
+
+        if(typeof itemGlobalId !== "undefined"){
+            survey123Instance = new Survey123WebForm({
+                clientId: "KiHuSotTULGiKtfZ",
+                container: "surveyView",
+                itemId: surveyItemId,
+                portalUrl: "https://cobecconsulting.maps.arcgis.com",
+                globalId: itemGlobalId,
+                mode: "edit"
+            });
+        }
+        else{
+            setTimeout(openIncidentDetails, 250);
+        }
     }
 }
 
 function openKeyTakeaways() {
-    document.querySelectorAll('iframe').forEach(
-        function(elem){
-            elem.parentNode.removeChild(elem);
-    });
-    
-    if(typeof itemGlobalId !== "undefined"){
-        survey123Instance = new Survey123WebForm({
-            clientId: "KiHuSotTULGiKtfZ",
-            container: "surveyView",
-            itemId: "98a44f915cc141439ff807eca0c7b671",
-            portalUrl: "https://cobecconsulting.maps.arcgis.com",
-            globalId: itemGlobalId,
-            mode: "edit"
+    if (surveyItemId != "98a44f915cc141439ff807eca0c7b671") {
+
+        surveyItemId = "98a44f915cc141439ff807eca0c7b671";
+
+        document.querySelectorAll('iframe').forEach(
+            function(elem){
+                elem.parentNode.removeChild(elem);
         });
-    }
-    else{
-        setTimeout(openIncidentDetails, 250);
+        
+        if(typeof itemGlobalId !== "undefined"){
+            survey123Instance = new Survey123WebForm({
+                clientId: "KiHuSotTULGiKtfZ",
+                container: "surveyView",
+                itemId: surveyItemId,
+                portalUrl: "https://cobecconsulting.maps.arcgis.com",
+                globalId: itemGlobalId,
+                mode: "edit"
+            });
+        }
+        else{
+            setTimeout(openIncidentDetails, 250);
+        }
     }
 }
 
 function resetSurvey(itemGlobalId) {
     if (survey123Instance) {
-        let itemId = survey123Instance.options.itemId;
+        surveyItemId = survey123Instance.options.itemId;
 
         document.querySelectorAll('iframe').forEach(
             function(elem){
@@ -189,7 +205,7 @@ function resetSurvey(itemGlobalId) {
         let newSurvey123Instance = new Survey123WebForm({
             clientId: "KiHuSotTULGiKtfZ",
             container: "surveyView",
-            itemId: itemId,
+            itemId: surveyItemId,
             portalUrl: "https://cobecconsulting.maps.arcgis.com",
             globalId: itemGlobalId,
             mode: "edit"
