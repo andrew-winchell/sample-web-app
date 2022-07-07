@@ -119,6 +119,7 @@ require([
 });
 
 let itemGlobalId;
+let survey123Instance;
 
 function openNewIncident() {
     document.querySelectorAll('iframe').forEach(
@@ -126,7 +127,7 @@ function openNewIncident() {
             elem.parentNode.removeChild(elem);
     });
 
-    let newIncidentForm = new Survey123WebForm({
+    survey123Instance = new Survey123WebForm({
         clientId: "KiHuSotTULGiKtfZ",
         container: "surveyView",
         itemId: "9d335e842d3f471f97cdba72bd53a430",
@@ -141,7 +142,7 @@ function openIncidentDetails() {
     });
 
     if(typeof itemGlobalId !== "undefined"){
-        let newIncidentForm = new Survey123WebForm({
+        survey123Instance = new Survey123WebForm({
             clientId: "KiHuSotTULGiKtfZ",
             container: "surveyView",
             itemId: "3e58460a08b84cd7a90f32b2f21ba728",
@@ -162,7 +163,7 @@ function openKeyTakeaways() {
     });
     
     if(typeof itemGlobalId !== "undefined"){
-        let newIncidentForm = new Survey123WebForm({
+        survey123Instance = new Survey123WebForm({
             clientId: "KiHuSotTULGiKtfZ",
             container: "surveyView",
             itemId: "98a44f915cc141439ff807eca0c7b671",
@@ -177,19 +178,15 @@ function openKeyTakeaways() {
 }
 
 function resetSurvey() {
-    if (itemGlobalId !== undefined) {
-        let old;
-        document.querySelectorAll('iframe').forEach(
-            function(elem){
-                old = elem.parentNode.firstChild;
-        });
-
+    if (itemGlobalId !== undefined || survey123Instance.globalId != itemGlobalId) {
+        let oldSurveyInstance = survey123Instance;
         document.querySelectorAll('iframe').forEach(
             function(elem){
                 elem.parentNode.removeChild(elem);
         });
 
-        document.getElementById('surveyView').appendChild(old);
+        oldSurveyInstance.globalId = itemGlobalId;
+        document.getElementById('surveyView').appendChild(oldSurveyInstance);
     }
 }
 
