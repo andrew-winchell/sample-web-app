@@ -122,7 +122,6 @@ require([
     };
 
     function listClickHandler(attributes) {
-        console.log(surveyItemId);
         if (itemGlobalId != attributes.globalid && surveyItemId != "9d335e842d3f471f97cdba72bd53a430"){
             itemGlobalId = attributes.globalid;
             resetSurvey(itemGlobalId);
