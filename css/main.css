@@ -75,6 +75,10 @@ html, body {
     overflow: auto;
 }
 
+#eventList {
+    margin: 2px;
+}
+
 #surveyPane {
     min-width: 20%;
     height: calc(100% - 20px);
