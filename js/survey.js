@@ -187,7 +187,6 @@ function resetSurvey() {
         survey123Instance.globalId = itemGlobalId;
         
         let oldSurveyInstance = new survey123Instance;
-        console.log(oldSurveyInstance);
     }
 }
 
