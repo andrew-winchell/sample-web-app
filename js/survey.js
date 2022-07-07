@@ -188,7 +188,7 @@ function resetSurvey() {
             elem.parentNode.removeChild(elem);
     });
 
-    current;
+    current.globalId = itemGlobalId;
 }
 
 //function to adjust css properties on side panel open button press
