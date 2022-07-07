@@ -114,7 +114,7 @@ require([
 
       function listClickHandler(attributes) {
         itemGlobalId = attributes.globalid;
-        resetSurvey();
+        resetSurvey(itemGlobalId);
       }
 });
 
@@ -177,22 +177,25 @@ function openKeyTakeaways() {
     }
 }
 
-function resetSurvey() {
-    let itemId = survey123Instance.itemId;
+function resetSurvey(itemGlobalId) {
+    if (survey123Instance) {
+        let itemId = survey123Instance.itemId;
+        console.log(itemId);
 
-    document.querySelectorAll('iframe').forEach(
-        function(elem){
-            elem.parentNode.removeChild(elem);
-    });
-    
-    let newSurvey123Instance = new Survey123WebForm({
-        clientId: "KiHuSotTULGiKtfZ",
-        container: "surveyView",
-        itemId: itemId,
-        portalUrl: "https://cobecconsulting.maps.arcgis.com",
-        globalId: itemGlobalId,
-        mode: "edit"
-    });
+        document.querySelectorAll('iframe').forEach(
+            function(elem){
+                elem.parentNode.removeChild(elem);
+        });
+        
+        let newSurvey123Instance = new Survey123WebForm({
+            clientId: "KiHuSotTULGiKtfZ",
+            container: "surveyView",
+            itemId: itemId,
+            portalUrl: "https://cobecconsulting.maps.arcgis.com",
+            globalId: itemGlobalId,
+            mode: "edit"
+        });
+    }
 }
 
 //function to adjust css properties on side panel open button press
