@@ -65,12 +65,12 @@ html, body {
 }
 
 #listHeader {
-    height: 10%;
+    height: 5%;
     width: auto;
 }
 
 #listContainer {
-    height: 90%;
+    height: 95%;
     width: auto;
     overflow: auto;
 }
