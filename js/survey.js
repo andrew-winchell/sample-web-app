@@ -177,18 +177,20 @@ function openKeyTakeaways() {
 }
 
 function resetSurvey() {
-    let current = document.querySelectorAll('iframe').forEach(
-        function(elem){
-            console.log(elem.parentNode.firstChild);
-            return elem.parentNode.firstChild;
-    });
+    if (itemGlobalId !== undefined) {
+        let current = document.querySelectorAll('iframe').forEach(
+            function(elem){
+                console.log(elem.parentNode.firstChild);
+                return elem.parentNode.firstChild;
+        });
 
-    document.querySelectorAll('iframe').forEach(
-        function(elem){
-            elem.parentNode.removeChild(elem);
-    });
+        document.querySelectorAll('iframe').forEach(
+            function(elem){
+                elem.parentNode.removeChild(elem);
+        });
 
-    current.globalId = itemGlobalId;
+        current;
+    }
 }
 
 //function to adjust css properties on side panel open button press
