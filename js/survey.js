@@ -179,14 +179,22 @@ function openKeyTakeaways() {
 
 function resetSurvey() {
     if (survey123Instance.globalId != itemGlobalId) {
+        let itemId = survey123Instance.itemId;
+        
         document.querySelectorAll('iframe').forEach(
             function(elem){
                 elem.parentNode.removeChild(elem);
         });
-
-        survey123Instance.globalId = itemGlobalId;
         
-        let oldSurveyInstance = new survey123Instance;
+        let newSurvey123Instance = new Survey123WebForm({
+            clientId: "KiHuSotTULGiKtfZ",
+            container: "surveyView",
+            itemId: itemId,
+            portalUrl: "https://cobecconsulting.maps.arcgis.com",
+            globalId: itemGlobalId,
+            mode: "edit"
+
+        })
     }
 }
 
