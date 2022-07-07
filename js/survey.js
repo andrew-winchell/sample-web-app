@@ -38,10 +38,7 @@ require([
         anonPanelElement.style.display = "none";
         personalPanelElement.style.display = "block";
         sidePanelElement.style.display = "block";
-
-  
-        //call the addWidgets function
-        //addWidgets();
+        openNewIncident();
     }
 
     // Create a default graphic for when the application starts
