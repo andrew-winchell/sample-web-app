@@ -63,6 +63,7 @@ require([
         portalItem: {
           id: "e0e2d6c68a2243b797ab2fd177567d4c"
         },
+        refreshInterval: 0.1,
         //if no layerId provided, defaults to first layer in service
         //layerId: 0
         popupEnabled: true,
@@ -101,6 +102,7 @@ require([
 
     const promise = listLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
     
+
     listLayer.on("refresh", function(event){
         if (event.dataChanged){
             console.log("Data Changed");
