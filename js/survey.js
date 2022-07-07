@@ -178,10 +178,10 @@ function openKeyTakeaways() {
 
 function resetSurvey() {
     if (itemGlobalId !== undefined) {
-        let current;
+        let old;
         document.querySelectorAll('iframe').forEach(
             function(elem){
-                current = elem.parentNode.firstChild;
+                old = elem.parentNode.firstChild;
         });
 
         document.querySelectorAll('iframe').forEach(
@@ -189,7 +189,7 @@ function resetSurvey() {
                 elem.parentNode.removeChild(elem);
         });
 
-        current;
+        document.getElementById('surveyView').appendChild(old);
     }
 }
 
