@@ -179,6 +179,7 @@ function openKeyTakeaways() {
 
 function resetSurvey(itemGlobalId) {
     if (survey123Instance) {
+        console.log(survey123Instance);
         let itemId = survey123Instance.itemId;
         console.log(itemId);
 
