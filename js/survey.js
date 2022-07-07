@@ -114,6 +114,7 @@ require([
 
       function listClickHandler(attributes) {
         itemGlobalId = attributes.globalid;
+        resetSurvey();
       }
 });
 
@@ -177,15 +178,16 @@ function openKeyTakeaways() {
 }
 
 function resetSurvey() {
-    if (itemGlobalId !== undefined || survey123Instance.globalId != itemGlobalId) {
-        let oldSurveyInstance = survey123Instance;
-        console.log(oldSurveyInstance);
+    if (survey123Instance.globalId != itemGlobalId) {
         document.querySelectorAll('iframe').forEach(
             function(elem){
                 elem.parentNode.removeChild(elem);
         });
+        
+        survey123Instance.globalId = itemGlobalId;
+        
+        let oldSurveyInstance = survey123Instance;
         console.log(oldSurveyInstance);
-        oldSurveyInstance.globalId = itemGlobalId;
     }
 }
 
