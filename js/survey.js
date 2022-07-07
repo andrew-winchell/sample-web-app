@@ -113,8 +113,10 @@ require([
       };
 
       function listClickHandler(attributes) {
-        itemGlobalId = attributes.globalid;
-        resetSurvey(itemGlobalId);
+        if (itemGlobalId != attributes.globalid){
+            itemGlobalId = attributes.globalid;
+            resetSurvey(itemGlobalId);
+        }
       }
 });
 
