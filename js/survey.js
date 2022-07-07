@@ -122,9 +122,11 @@ require([
     };
 
     function listClickHandler(attributes) {
-        if (itemGlobalId != attributes.globalid && surveyItemId != "9d335e842d3f471f97cdba72bd53a430"){
-            itemGlobalId = attributes.globalid;
-            resetSurvey(itemGlobalId);
+        if (itemGlobalId != attributes.globalid){
+            itemGlobalId = attributes.globalid; 
+            if (surveyItemId != "9d335e842d3f471f97cdba72bd53a430"){
+                resetSurvey(itemGlobalId);
+            }
         }
     };
 });
