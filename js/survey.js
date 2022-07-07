@@ -114,7 +114,6 @@ require([
 
       function listClickHandler(attributes) {
         itemGlobalId = attributes.globalid;
-        resetSurvey();
       }
 });
 
@@ -187,7 +186,6 @@ function resetSurvey() {
         });
         console.log(oldSurveyInstance);
         oldSurveyInstance.globalId = itemGlobalId;
-        document.getElementById('surveyView').appendChild(oldSurveyInstance);
     }
 }
 
