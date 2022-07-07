@@ -178,9 +178,10 @@ function openKeyTakeaways() {
 
 function resetSurvey() {
     if (itemGlobalId !== undefined) {
-        let current = document.querySelectorAll('iframe').forEach(
+        let current;
+        document.querySelectorAll('iframe').forEach(
             function(elem){
-                return elem.parentNode.firstChild;
+                current = elem.parentNode.firstChild;
         });
 
         document.querySelectorAll('iframe').forEach(
