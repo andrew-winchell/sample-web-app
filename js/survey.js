@@ -2,13 +2,9 @@ require([
     "esri/core/promiseUtils",
     "esri/identity/OAuthInfo",
     "esri/identity/IdentityManager",
-    "esri/Map",
-    "esri/views/MapView",
     "esri/layers/FeatureLayer",
-    "esri/widgets/Feature",
-    "esri/widgets/BasemapGallery",
-    "esri/widgets/Expand"
-], function (promiseUtils, OAuthInfo, esriId, Map, MapView, FeatureLayer, Feature, BasemapGallery, Expand) {
+    "esri/widgets/Feature"
+], function (promiseUtils, OAuthInfo, esriId, FeatureLayer, Feature) {
 
     //OAuth constant linking to registered AGOL application and logging to Cobec portal
     const info = new OAuthInfo({
@@ -47,6 +43,19 @@ require([
         //call the addWidgets function
         //addWidgets();
     }
+
+    // Create a default graphic for when the application starts
+    const graphic = {
+        popupTemplate: {
+          content: "Select from incident list to view details..."
+        }
+    };
+
+    // Provide graphic to a new instance of a Feature widget
+    const feature = new Feature({
+        container: "featureDetailsDiv",
+        graphic: graphic
+    });
 
     //Initialize new FeatureLayer constant
     const listLayer = new FeatureLayer({
@@ -88,36 +97,37 @@ require([
         returnGeometry: true,
         //order features by {field_name}
         orderByFields: ["objectid"]
-      };
+    };
 
-      const promise = listLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
-      
-      let features;
-      //function to loop through queried feature set and create pick list items for each feature
-      function convertFeatureSetToRows(featureSet, query) {
+    const promise = listLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
+    
+    let features;
+    //function to loop through queried feature set and create pick list items for each feature
+    function convertFeatureSetToRows(featureSet, query) {
         eventsListElement.innerHTML = "";
         eventsListElement.style.paddingTop = headerPanelElement.style.height.toString();
 
         features = featureSet.features;
         features.forEach((result, index) => {
-          const attributes = result.attributes;
-          const label = attributes.incident_name;
+            const attributes = result.attributes;
+            const label = attributes.incident_name;
 
-          const item = document.createElement("calcite-value-list-item");
-          item.setAttribute("label", label);
-          item.setAttribute("value", index);
-          item.setAttribute("description", attributes.incident_start_dtg);
-          item.addEventListener("click", () => listClickHandler(attributes));
-          eventsListElement.appendChild(item);
+            const item = document.createElement("calcite-value-list-item");
+            item.setAttribute("label", label);
+            item.setAttribute("value", index);
+            item.setAttribute("description", attributes.incident_start_dtg);
+            item.addEventListener("click", () => listClickHandler(attributes));
+            eventsListElement.appendChild(item);
         });
-      };
+    };
 
-      function listClickHandler(attributes) {
-        if (itemGlobalId != attributes.globalid){
+    function listClickHandler(attributes) {
+        console.log(surveyItemId);
+        if (itemGlobalId != attributes.globalid && surveyItemId != "9d335e842d3f471f97cdba72bd53a430"){
             itemGlobalId = attributes.globalid;
             resetSurvey(itemGlobalId);
         }
-      }
+    };
 });
 
 let itemGlobalId;
@@ -225,7 +235,7 @@ function openSide() {
 }
   
   //function to adjust css properties on side panel close button press
-  function closeSide() {
+function closeSide() {
     document.getElementById("sidePanel").style.width = "0px";
     document.getElementById("bodyDiv").style.marginLeft = "0px";
     document.getElementById("closeBtn").style.display = "none";
