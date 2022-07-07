@@ -101,7 +101,7 @@ require([
     
     listLayer.on("refresh", function(event){
         if (event.dataChanged){
-            console.log("Data Changed");
+            promise;
         }
     })
     
