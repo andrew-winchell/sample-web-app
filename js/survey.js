@@ -135,6 +135,11 @@ require([
 let itemGlobalId;
 
 function openNewIncident() {
+    document.querySelectorAll('iframe').forEach(
+        function(elem){
+            elem.parentNode.removeChild(elem);
+    });
+
     let newIncidentForm = new Survey123WebForm({
         clientId: "KiHuSotTULGiKtfZ",
         container: "surveyView",
@@ -144,6 +149,11 @@ function openNewIncident() {
 }
 
 function openIncidentDetails() {
+    document.querySelectorAll('iframe').forEach(
+        function(elem){
+            elem.parentNode.removeChild(elem);
+    });
+    
     if(typeof itemGlobalId !== "undefined"){
         let newIncidentForm = new Survey123WebForm({
             clientId: "KiHuSotTULGiKtfZ",
