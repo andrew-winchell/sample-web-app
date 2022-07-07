@@ -178,7 +178,10 @@ function openKeyTakeaways() {
 }
 
 function resetSurvey() {
-    if (survey123Instance.mode == "edit" && survey123Instance.globalId != itemGlobalId) {
+    console.log(survey123Instance.mode);
+    console.log(survey123Instance.globalId);
+    
+    
         let itemId = survey123Instance.itemId;
 
         document.querySelectorAll('iframe').forEach(
@@ -195,7 +198,7 @@ function resetSurvey() {
             mode: "edit"
 
         })
-    }
+    
 }
 
 //function to adjust css properties on side panel open button press
