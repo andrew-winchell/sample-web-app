@@ -180,11 +180,12 @@ function openKeyTakeaways() {
 function resetSurvey() {
     if (itemGlobalId !== undefined || survey123Instance.globalId != itemGlobalId) {
         let oldSurveyInstance = survey123Instance;
+        console.log(oldSurveyInstance);
         document.querySelectorAll('iframe').forEach(
             function(elem){
                 elem.parentNode.removeChild(elem);
         });
-
+        console.log(oldSurveyInstance);
         oldSurveyInstance.globalId = itemGlobalId;
         document.getElementById('surveyView').appendChild(oldSurveyInstance);
     }
