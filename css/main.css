@@ -77,7 +77,7 @@ html, body {
 
 #surveyPane {
     min-width: 20%;
-    height: 75%;
+    height: calc(100% - 20px);
     margin: 10px;
     float: left;
     flex-grow: 1;
