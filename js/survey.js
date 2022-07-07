@@ -180,7 +180,6 @@ function resetSurvey() {
     if (itemGlobalId !== undefined) {
         let current = document.querySelectorAll('iframe').forEach(
             function(elem){
-                console.log(elem.parentNode.firstChild);
                 return elem.parentNode.firstChild;
         });
 
