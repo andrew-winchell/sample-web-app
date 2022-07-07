@@ -187,6 +187,8 @@ function resetSurvey() {
         function(elem){
             elem.parentNode.removeChild(elem);
     });
+
+    current;
 }
 
 //function to adjust css properties on side panel open button press
