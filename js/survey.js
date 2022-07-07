@@ -135,11 +135,28 @@ require([
 let itemGlobalId;
 
 function openNewIncident() {
-    console.log(itemGlobalId);
+    let newIncidentForm = new Survey123WebForm({
+        clientId: "KiHuSotTULGiKtfZ",
+        container: "surveyView",
+        itemId: "9d335e842d3f471f97cdba72bd53a430",
+        portalUrl: "https://cobecconsulting.maps.arcgis.com"
+    });
 }
 
 function openIncidentDetails() {
-    return 1;
+    if(typeof itemGlobalId !== "undefined"){
+        let newIncidentForm = new Survey123WebForm({
+            clientId: "KiHuSotTULGiKtfZ",
+            container: "surveyView",
+            itemId: "3e58460a08b84cd7a90f32b2f21ba728",
+            portalUrl: "https://cobecconsulting.maps.arcgis.com",
+            globalId: itemGlobalId,
+            mode: "edit"
+        });
+    }
+    else{
+        setTimeout(openIncidentDetails, 250);
+    }
 }
 
 function openKeyTakeaways() {
