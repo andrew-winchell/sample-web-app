@@ -178,7 +178,7 @@ function openKeyTakeaways() {
 }
 
 function resetSurvey() {
-    if (survey123Instance !== undefined && survey123Instance.mode == "edit" && survey123Instance.globalId != itemGlobalId) {
+    if (survey123Instance.mode == "edit" && survey123Instance.globalId != itemGlobalId) {
         let itemId = survey123Instance.itemId;
 
         document.querySelectorAll('iframe').forEach(
