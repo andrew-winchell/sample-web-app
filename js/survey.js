@@ -106,8 +106,7 @@ require([
                 function(elem){
                     elem.parentNode.removeChild(elem);
             })
-            .then(listLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query))
-            );
+            listLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
         }
     });
     
