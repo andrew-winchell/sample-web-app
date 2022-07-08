@@ -162,7 +162,7 @@ function openIncidentDetails() {
                 elem.parentNode.removeChild(elem);
         });
 
-        if(typeof itemGlobalId !== "undefined"){
+        if(itemGlobalId != "undefined"){
             survey123Instance = new Survey123WebForm({
                 clientId: "KiHuSotTULGiKtfZ",
                 container: "surveyView",
