@@ -87,7 +87,7 @@ require([
         //if no num or start properties are set, returns the maxRecordCount on feature service
         //start at the first feature
         //start: 0,
-        //return first 20 records in query
+        //return first 1000 records in query
         num: 1000,
         //return all fields from feature
         outFields: ["*"],
