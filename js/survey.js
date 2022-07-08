@@ -97,7 +97,9 @@ require([
         orderByFields: ["objectid"]
     };
 
-    const promise = listLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
+    listLayer.on("refresh", function(event){
+        const promise = listLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
+    });
     
     let features;
     //function to loop through queried feature set and create pick list items for each feature
