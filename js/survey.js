@@ -153,29 +153,27 @@ function openNewIncident() {
 }
 
 function openIncidentDetails() {
-    if (surveyItemId != "3e58460a08b84cd7a90f32b2f21ba728") {
+    surveyItemId = "3e58460a08b84cd7a90f32b2f21ba728";
 
-        surveyItemId = "3e58460a08b84cd7a90f32b2f21ba728";
+    document.querySelectorAll('iframe').forEach(
+        function(elem){
+            elem.parentNode.removeChild(elem);
+    });
 
-        document.querySelectorAll('iframe').forEach(
-            function(elem){
-                elem.parentNode.removeChild(elem);
+    if(itemGlobalId != undefined){
+        survey123Instance = new Survey123WebForm({
+            clientId: "KiHuSotTULGiKtfZ",
+            container: "surveyView",
+            itemId: surveyItemId,
+            portalUrl: "https://cobecconsulting.maps.arcgis.com",
+            globalId: itemGlobalId,
+            mode: "edit"
         });
-
-        if(itemGlobalId != undefined){
-            survey123Instance = new Survey123WebForm({
-                clientId: "KiHuSotTULGiKtfZ",
-                container: "surveyView",
-                itemId: surveyItemId,
-                portalUrl: "https://cobecconsulting.maps.arcgis.com",
-                globalId: itemGlobalId,
-                mode: "edit"
-            });
-        }
-        else{
-            setTimeout(openIncidentDetails, 250);
-        }
     }
+    else{
+        setTimeout(openIncidentDetails, 250);
+    }
+    
 }
 
 function openKeyTakeaways() {
