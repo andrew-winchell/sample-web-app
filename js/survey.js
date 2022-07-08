@@ -153,15 +153,18 @@ function openNewIncident() {
 }
 
 function openIncidentDetails() {
+    // remove prior loaded survey from surveyPane
+    document.querySelectorAll('iframe').forEach(
+        function(elem){
+            elem.parentNode.removeChild(elem);
+    });
+
     // check to see if a list item has been selected
     if(itemGlobalId != undefined){
-        
+        //set the survey item id
         surveyItemId = "3e58460a08b84cd7a90f32b2f21ba728";
 
-        document.querySelectorAll('iframe').forEach(
-            function(elem){
-                elem.parentNode.removeChild(elem);
-        });
+        // create a new survey123 instance with the new global id and form item id
         survey123Instance = new Survey123WebForm({
             clientId: "KiHuSotTULGiKtfZ",
             container: "surveyView",
