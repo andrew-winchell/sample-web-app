@@ -104,9 +104,7 @@ require([
                 function(elem){
                     elem.parentNode.removeChild(elem);
             });
-            var featureSet = listLayer.queryFeatures(query);
-            console.log(featureSet);
-            //convertFeatureSetToRows(featureSet, query);
+            listLayer.queryFeatures(query).then((querySet) => convertFeatureSetToRows(querySet, query))
         }
     });
 
