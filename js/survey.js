@@ -100,7 +100,7 @@ require([
     listLayer.on("refresh", function(event){
         console.log("REFRESH");
         if (event.dataChanged) {
-            document.querySelectorAll("#eventList").forEach(
+            document.querySelectorAll("calcite-value-list-item").forEach(
                 function(elem){
                     elem.parentNode.removeChild(elem);
             });
