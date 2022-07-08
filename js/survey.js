@@ -153,14 +153,15 @@ function openNewIncident() {
 }
 
 function openIncidentDetails() {
-    surveyItemId = "3e58460a08b84cd7a90f32b2f21ba728";
-
-    document.querySelectorAll('iframe').forEach(
-        function(elem){
-            elem.parentNode.removeChild(elem);
-    });
-
+    // check to see if a list item has been selected
     if(itemGlobalId != undefined){
+        
+        surveyItemId = "3e58460a08b84cd7a90f32b2f21ba728";
+
+        document.querySelectorAll('iframe').forEach(
+            function(elem){
+                elem.parentNode.removeChild(elem);
+        });
         survey123Instance = new Survey123WebForm({
             clientId: "KiHuSotTULGiKtfZ",
             container: "surveyView",
@@ -170,6 +171,7 @@ function openIncidentDetails() {
             mode: "edit"
         });
     }
+    //if no list item selected, re-run every .25 seconds until true
     else{
         setTimeout(openIncidentDetails, 250);
     }
