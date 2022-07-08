@@ -123,7 +123,7 @@ require([
         if (itemGlobalId != attributes.globalid){
             itemGlobalId = attributes.globalid; 
             if (surveyItemId != "9d335e842d3f471f97cdba72bd53a430"){
-                console.log(itemGlobalId, surveyItemId);//resetSurvey(itemGlobalId);
+                resetSurvey(itemGlobalId);
             }
         }
     };
