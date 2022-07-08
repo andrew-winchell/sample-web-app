@@ -99,10 +99,12 @@ require([
 
     listLayer.on("refresh", function(event){
         console.log("REFRESH");
-        document.querySelectorAll("#eventList").forEach(
-            function(elem){
-                elem.parentNode.removeChild(elem);
-        });
+        if (event.dataChanged) {
+            document.querySelectorAll("#eventList").forEach(
+                function(elem){
+                    elem.parentNode.removeChild(elem);
+            });
+        }
     });
 
     const promise = listLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
