@@ -99,7 +99,7 @@ require([
 
     listLayer.on("refresh", function(event){
         console.log("REFRESH");
-        document.querySelector("#eventList").forEach(
+        document.querySelectorAll("#eventList").forEach(
             function(elem){
                 elem.parentNode.removeChild(elem);
         });
