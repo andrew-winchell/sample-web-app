@@ -98,9 +98,11 @@ require([
     };
 
     listLayer.on("refresh", function(event){
-        const promise = listLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
+        console.log("REFRESH");
     });
-    
+
+    const promise = listLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
+
     let features;
     //function to loop through queried feature set and create pick list items for each feature
     function convertFeatureSetToRows(featureSet, query) {
