@@ -178,32 +178,33 @@ function openIncidentDetails() {
     else{
         setTimeout(openIncidentDetails, 250);
     }
-    
 }
 
 function openKeyTakeaways() {
-    if (surveyItemId != "98a44f915cc141439ff807eca0c7b671") {
+    // remove prior loaded survey from surveyPane
+    document.querySelectorAll('iframe').forEach(
+        function(elem){
+            elem.parentNode.removeChild(elem);
+    });
 
+    // check to see if a list item has been selected
+    if(itemGlobalId != undefined){
+        //set the survey item id
         surveyItemId = "98a44f915cc141439ff807eca0c7b671";
 
-        document.querySelectorAll('iframe').forEach(
-            function(elem){
-                elem.parentNode.removeChild(elem);
+        // create a new survey123 instance with the new global id and form item id
+        survey123Instance = new Survey123WebForm({
+            clientId: "KiHuSotTULGiKtfZ",
+            container: "surveyView",
+            itemId: surveyItemId,
+            portalUrl: "https://cobecconsulting.maps.arcgis.com",
+            globalId: itemGlobalId,
+            mode: "edit"
         });
-        
-        if(typeof itemGlobalId !== "undefined"){
-            survey123Instance = new Survey123WebForm({
-                clientId: "KiHuSotTULGiKtfZ",
-                container: "surveyView",
-                itemId: surveyItemId,
-                portalUrl: "https://cobecconsulting.maps.arcgis.com",
-                globalId: itemGlobalId,
-                mode: "edit"
-            });
-        }
-        else{
-            setTimeout(openIncidentDetails, 250);
-        }
+    }
+    //if no list item selected, re-run every .25 seconds until true
+    else{
+        setTimeout(openKeyTakeaways, 250);
     }
 }
 
