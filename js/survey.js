@@ -105,10 +105,11 @@ require([
             document.querySelectorAll("#eventList").forEach(
                 function(elem){
                     elem.parentNode.removeChild(elem);
-            });
-            listLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query));
+            })
+            .then(listLayer.queryFeatures(query).then((featureSet) => convertFeatureSetToRows(featureSet, query))
+            );
         }
-    })
+    });
     
     let features;
     //function to loop through queried feature set and create pick list items for each feature
